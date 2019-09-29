@@ -1,73 +1,85 @@
-<?php
-// Initialize the session
-session_start();
- 
-// Check if the user is already logged in, if yes then redirect him to welcome page
-if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
-  header("location: welcome.php");
-  exit;
-}
- 
+<?php 
 // Include config file
 require_once "config.php";
- 
-/* Attempt MySQL server connection. Assuming you are running MySQL
-server with default setting (user 'root' with no password) */
-$conn = OpenCon();
+
+$title = $description = "";
+$title_err = $description_err = "";
+
 $status = "pending";
-$title = $_GET["title"];
-$description = $_GET["description"];
-$assign_to =$_GET["assignTo"];
+$assign_to =  "";
 $raised_by = "clientInformation";
 $priority = "Normal";
-$category = $_GET["category"];
+$category = "";
 $due_date = date("Y/m/d");
 $last_updated = date("Y/m/d");
 $created_date = date("Y/m/d");
 $attached_doc = 0;
-/*
-$sql = "INSERT INTO ticket (status, title, description, assign_to, raised_by, priority, category, due_date,
- last_updated, created_date, attached_doc) VALUES (".$status.", ".$title.", ".$description.", ".$assign_to.",
-  ".$raised_by.", ".$priority.", ".$category.",".$due_date.", ".$last_updated.", ".$created_date.", ".$attached_doc.")";
-echo $sql;
-*/
-// Attempt insert query execution
-$sql = "INSERT INTO ticket (status, title, description, assign_to, raised_by, priority, category, due_date,
- last_updated, created_date, attached_doc) VALUES ('".$status."', '".$title."', '".$description."', '".$assign_to."',
-  '".$raised_by."', '".$priority."', '".$category."','".$due_date."', '".$last_updated."', '".$created_date."', ".$attached_doc.")";
-if(mysqli_query($conn, $sql)){
-    echo "Records inserted successfully.";
+
+if($_SERVER["REQUEST_METHOD"] == "POST"){
+
+  // Check if title is empty
+  if(empty(trim($_POST["title"]))){
+    $title_err = "Please enter title.";
 } else{
-    echo "ERROR: Could not able to execute $sql. " . mysqli_error($conn);
+    $title = trim($_POST["title"]);
 }
-// Close connection
-mysqli_close($conn);
-/*include 'db_connection.php';
-$conn = OpenCon();
-echo "Connected Successfully";
-CloseCon($conn);*/
-?>
+
+// Check if description is empty
+if(empty(trim($_POST["description"]))){
+    $description_err = "Please enter a description.";
+} else{
+    $description = trim($_POST["description"]);
+}
+
+// Check input errors before inserting in database
+if(empty($title_err) && empty($description_err) ){
         
-        // Close statement
-        mysqli_stmt_close($stmt);
-    }
-    
-    // Close connection
-    mysqli_close($link);
+  // Prepare an insert statement
+  $sql = "INSERT INTO ticket (status, title, description, assign_to, raised_by, priority, category, due_date,
+ last_updated, created_date, attached_doc) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+
+   
+  if($stmt = mysqli_prepare($link, $sql)){
+      // Bind variables to the prepared statement as parameters
+      mysqli_stmt_bind_param($stmt, "ssssssssssi", $param_status, $param_title,$param_description, $param_assign_to, $param_raised_by,
+      $param_priority, $param_category, $param_due_date, $param_last_updated, $param_created_date, $param_attached_doc);
+      
+      // Set parameters
+      $param_status = $status;
+      $param_title = $title;
+      $param_description = $description;
+      $param_assign_to =$_POST["assignTo"];
+      $param_raised_by = $raised_by;
+      $param_priority = $priority;
+      $param_category = $_POST["category"];
+      $param_due_date = $due_date;
+      $param_last_updated = $last_updated;
+      $param_created_date = $created_date;
+      $param_attached_doc = $attached_doc;
+
+      // Attempt to execute the prepared statement
+      if(mysqli_stmt_execute($stmt)){
+          // Redirect to welcome page
+          header("location: welcome.php");
+      } else{
+          echo "Something went wrong. Please try again later.";
+      }
+  }
+   
+  // Close statement
+  mysqli_stmt_close($stmt);
 }
+
+// Close connection
+mysqli_close($link);
+
+}
+
+
+
+
 ?>
  
-
-
-
-
-
-
-
-
-
-
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -91,7 +103,7 @@ CloseCon($conn);*/
           </div>
 <h2>New Ticket</h2>
 <p>Please fill in the form below to open a new ticket</p>
-<form  action="../php/submitTicket.php" method="get">
+<form  action="" method="post">
     <br><br>
     Category:
     <select name="category">
@@ -102,10 +114,12 @@ CloseCon($conn);*/
     </select>
     <br><br>
     Title: <input type="text" name="title" >
+    <span class="help-block"><?php echo $title_err; ?></span>
     
     <br><br>
 
     Description: <textarea name="description" rows="10" cols="80"></textarea>
+    <span class="help-block"><?php echo $description_err; ?></span>
     <br><br>
     Due Date: <input type="date" name="dueDate">
     <br><br>

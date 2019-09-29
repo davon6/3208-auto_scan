@@ -136,7 +136,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
   
     <div class="container" >
       <button type="button" style="width:160px; height: 40px;float:left; margin-top:1%;">
-          <a style="text-decoration: none"  href="http://localhost/site2/html/ticket.html">Add a ticket</a></button>
+          <a style="text-decoration: none"  href="/autoscan/app/ticket.php">Add a ticket</a></button>
       
     </div>
     <p  style="float:left; margin-left:4%; padding: 3%;">
