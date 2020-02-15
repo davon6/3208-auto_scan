@@ -7,7 +7,7 @@ $title_err = $description_err = "";
 
 $status = "pending";
 $assign_to =  "";
-$raised_by = "clientInformation";
+$username = "30350561";
 $priority = "Normal";
 $category = "";
 $due_date = date("Y/m/d");
@@ -16,6 +16,9 @@ $created_date = date("Y/m/d");
 $attached_doc = 0;
 
 if($_SERVER["REQUEST_METHOD"] == "POST"){
+
+
+   
 
   // Check if title is empty
   if(empty(trim($_POST["title"]))){
@@ -31,25 +34,35 @@ if(empty(trim($_POST["description"]))){
     $description = trim($_POST["description"]);
 }
 
+
 // Check input errors before inserting in database
 if(empty($title_err) && empty($description_err) ){
-        
+
   // Prepare an insert statement
-  $sql = "INSERT INTO ticket (status, title, description, assign_to, raised_by, priority, category, due_date,
- last_updated, created_date, attached_doc) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+  $sql = "INSERT INTO ticket (status, title, description, assign_to, username , priority, category, due_date,
+ last_updated, created_date, attached_doc ) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+
+
+
 
    
   if($stmt = mysqli_prepare($link, $sql)){
       // Bind variables to the prepared statement as parameters
-      mysqli_stmt_bind_param($stmt, "ssssssssssi", $param_status, $param_title,$param_description, $param_assign_to, $param_raised_by,
+      mysqli_stmt_bind_param($stmt, "ssssssssssi", $param_status, $param_title,$param_description, $param_assign_to, $param_username	,
       $param_priority, $param_category, $param_due_date, $param_last_updated, $param_created_date, $param_attached_doc);
+
+
+
+
+
+
       
       // Set parameters
       $param_status = $status;
       $param_title = $title;
       $param_description = $description;
       $param_assign_to =$_POST["assignTo"];
-      $param_raised_by = $raised_by;
+      $param_username	 = $username;
       $param_priority = $priority;
       $param_category = $_POST["category"];
       $param_due_date = $due_date;
@@ -75,9 +88,6 @@ mysqli_close($link);
 
 }
 
-
-
-
 ?>
  
 <!DOCTYPE html>
@@ -93,6 +103,15 @@ mysqli_close($link);
       text-align: left;
     }
   </style>
+
+<script>
+
+
+
+
+
+</script>
+
 </head>
 <body>
         <div class="topnav">
@@ -103,14 +122,16 @@ mysqli_close($link);
           </div>
 <h2>New Ticket</h2>
 <p>Please fill in the form below to open a new ticket</p>
+
+
 <form  action="" method="post">
     <br><br>
     Category:
     <select name="category">
         <option value="Normal">Select Category</option>
-        <option>Category 1</option>
-        <option>Category 2</option>
-        <option>Category 3</option>
+        <option>Technical Issue</option>
+        <option>Software Setup</option>
+        <option>Other</option>
     </select>
     <br><br>
     Title: <input type="text" name="title" >
@@ -118,11 +139,14 @@ mysqli_close($link);
     
     <br><br>
 
-    Description: <textarea name="description" rows="10" cols="80"></textarea>
+   Description: <textarea name="description" rows="10" cols="80"></textarea>
     <span class="help-block"><?php echo $description_err; ?></span>
     <br><br>
+	
+	<label for="fileInput" class="btn btn-danger" > Add Files </label>
+<input type="file"  id="fileInput" />
+	<br><br>
     Due Date: <input type="date" name="dueDate">
-    <br><br>
     <br><br>
     <section class="inline" style="border: unset">
         Assign to:
