@@ -8,8 +8,6 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     exit;
 }
 
-
-
 ?>
  
 <!DOCTYPE html>
@@ -112,21 +110,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
 
 <script>
 
-
-
-
 var id = 0;
-
-//document.getElementById("toDelete").value = 0
-
-
-
- //document.getElementById("toDelete").value =document.getElementById("id").value;
- 
- 
- /*document.getElementById("ticketsTable").rows.item
-  (document.getElementById("id").value+1).innerHTML.substring(4,220).replace(/\//g, ' ')
-  .trim().replace(/< td>/g, " ").replace(/<td>/g, " "));*/
 
   // Get the modal
 var modal = document.getElementById("myModal");
@@ -187,49 +171,16 @@ xmlhttp.open("POST", "deleteTicket.php?i=" + id , true);
 xmlhttp.send();   
  
 
-//+ "&l="+ likes
-
-
- 
-   //alert("ok?") ;
   } else {
-    //txt = "You pressed Cancel!";
-
-    alert("?") //txt = "You pressed OK! ";
+    alert("?") //ticket not deleted
   }
-  //document.getElementById("demo").innerHTML = txt;
-
-  
-  
-  //document.getElementById("id").value = id;
-
-
-
- //alert(document.getElementById("ticketsTable").rows.item(id+1).innerHTML.substring(4,220).replace(/\//g, ' ')
-//.trim().replace(/< td>/g, " ").replace(/<td>/g, " "));
-
- 
-
-  //  alert("hellooo");
-
-
-//return id;
  
 }
 
-
-
-
-
 </script>
-
-  
 
   <form  method="post">
    
-    
-  
-
 <?php
 
 require_once "config.php";
@@ -244,11 +195,6 @@ $sql = "SELECT ticket_id, status, title, description, assign_to, username, prior
 created_date, attached_doc FROM ticket ";
         
 if($stmt = mysqli_prepare($link, $sql)){
-    // Bind variables to the prepared statement as parameters
-    //mysqli_stmt_bind_param($stmt, "s", $param_username);
-    
-    // Set parameters
-    //$param_username = $username;
     
     // Attempt to execute the prepared statement
     if(mysqli_stmt_execute($stmt)){
@@ -280,9 +226,7 @@ if($stmt = mysqli_prepare($link, $sql)){
             <td> <font face="Arial">attached_doc</font> </td> 
         </tr>';
             while($stmt->fetch()){ 
-
-
-              
+            
             //if(mysqli_stmt_fetch($stmt)){
 
               echo '<tr>
@@ -300,7 +244,6 @@ if($stmt = mysqli_prepare($link, $sql)){
 
             echo   '<input type="hidden"  name="id" id="id" />';
           }}}
-
 
 
           if (isset($_REQUEST['btn_submit'])) {
@@ -329,8 +272,7 @@ if($stmt = mysqli_prepare($link, $sql)){
           
                     break;
           
-          
-            
+
                case "View":
           
                 echo "good";
@@ -362,8 +304,6 @@ if($stmt = mysqli_prepare($link, $sql)){
                 }
              break;
 
-
-          
         case "Delete":
          
          
@@ -376,25 +316,17 @@ if($stmt = mysqli_prepare($link, $sql)){
         
             }
           }
-
-       
-
           
 ?>
 
-
 </form>
 </section>
-
-
 
 <footer>
   
   <p><a href="reset-password.php" class="btn btn-warning">Reset Your Password</a>
         <a href="logout.php" class="btn btn-danger">Sign Out of Your Account</a></p>
 </footer>
-
-
 
 </body>
 </html>
