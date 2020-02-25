@@ -20,6 +20,7 @@ $title_err = $description_err = "";
 $status = "pending";
 $assign_to =  "";
 $username = $_SESSION["username"];
+
 $priority = "Normal";
 $category = "";
 $due_date = date("Y/m/d");
@@ -29,8 +30,8 @@ $attached_doc = 0;
 
 if($_SERVER["REQUEST_METHOD"] == "POST"){
 
+    $usertype =$_SESSION["userType"];
 
-   
 
   // Check if title is empty
   if(empty(trim($_POST["title"]))){
@@ -49,6 +50,8 @@ if(empty(trim($_POST["description"]))){
 
 // Check input errors before inserting in database
 if(empty($title_err) && empty($description_err) ){
+
+    
 
   // Prepare an insert statement
   $sql = "INSERT INTO ticket (status, title, description, assign_to, username , priority, category, due_date,
@@ -85,7 +88,23 @@ if(empty($title_err) && empty($description_err) ){
       // Attempt to execute the prepared statement
       if(mysqli_stmt_execute($stmt)){
           // Redirect to welcome page
-          header("location: welcome.php");
+
+        
+
+        
+          if (  $usertype=== 'admin')
+          {
+            header("location: welcome.php");
+          }
+          else if (  $usertype=== 'member')
+          {
+            header("location: homeMember.php");
+          };
+
+
+
+
+
       } else{
           echo "Something went wrong. Please try again later.";
       }

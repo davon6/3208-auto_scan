@@ -16,6 +16,10 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     <link rel="stylesheet" href="../css/css.css">
 <title>Dashboard</title>
 </head>
+
+<div class="page-header">
+        <h1>Hi, <b><?php echo htmlspecialchars($_SESSION["username"]); ?></b> </h1>
+    </div>
 <body>
     <script>
  
@@ -110,40 +114,98 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
                           </table>
 
 
-          <section style="margin: 1%; width:98% ">
-            <tr>
-                <th >
-          <table >
-              <tr>
-                <th style="width: 80%">#reference</th>
-                
-              </tr><tr>
-                  <th style="width: 80%">STATUS</th>
-                  
-                </tr>
-            </table>
-          </th>
-          <th >
-                  <table >
-                <tr>
-                  <th style="width: 80%">NAME TICKET<br/><br/>description ticket</th>
-                  <th style="padding-right:130px">last updated<br/><br/>***date****</th>
-                  <th style="align-content: left" >Attached document</th>
-                </tr>
-              </table>
-            </tr>
+<?php
+
+require_once "config.php";
+
+
+
+$ticket_id= $status= $title= $description=$assign_to=
+            $priority=$category=$due_date=$last_updated=$created_date=$attached_doc = "";
+
+
+            $username=$_SESSION["username"];
+
+$numOfRows = 0;
+
+$sql = "SELECT`ticket_id`,`status`,`title`,`description`,`assign_to`,`username`,`priority`,`category`,`due_date`,`last_updated`,`created_date`,`attached_doc`  FROM `ticket` WHERE `username` LIKE '$username'; ";
+
+
+
+//WHERE username ={ SELECT User_type FROM UserT WHERE = ".$_SESSION["username"]."}
+
+
+
+          if($stmt = mysqli_prepare($link, $sql)){
+    
+    // Attempt to execute the prepared statement
+    if(mysqli_stmt_execute($stmt)){
+        // Store result
+        mysqli_stmt_store_result($stmt);
+
+
+        // Check if username exists, if yes then verify password
+        if(mysqli_stmt_num_rows($stmt) >= 1){     
+          
+        
+            // Bind result variables
+            mysqli_stmt_bind_result($stmt, $ticket_id, $status, $title, $description,$assign_to,$username,
+            $priority,$category,$due_date,$last_updated,$created_date,$attached_doc);
+           
+
+            while($stmt->fetch()){ 
             
-          </th>
-        <table class="table2" >
-        <tr>
-      <th class="column" >action1 </th>  <th style="width: 10%" class="column">action2</th> <th class="column">action3<th>
-        <th style="width: 20%"class="column">assigned to<br/>name</th>   <th style="width: 20%"class="column">Raised by<br>name  </th>
-         <th class="column" style="width: 15%">Priority<br/>low  </th> <th class="column" style="width: 20%">Category<br/>Support  </th> 
-         <th class="column">Due date<br/>03/09/2019</th> <th>action9</th>
-     </tr>
-  
-    </table >
-  </section>
+            //if(mysqli_stmt_fetch($stmt)){
+
+              echo '<table class="table2" >
+              <tr>
+              <th class="column" >action1 </th>  <th style="width: 10%" class="column">action2</th> <th class="column">action3<th>
+              <th style="width: 20%"class="column">assigned to '.$assign_to.'<br/>name </th>   <th style="width: 20%"class="column">Raised by '.$username.'<br>name  </th>
+              <th class="column" style="width: 15%">Priority'.$priority.'<br/>low  </th> <th class="column" style="width: 20%">Category'.$category.'<br/>Support  </th> 
+              <th class="column">Last updated<'.$last_updated.' <th>action9</th>
+              </tr>
+              </table >
+              
+          <section style="margin: 1%;  ">
+       
+        <table >
+
+
+        <th >
+            
+              <tr>
+              <th>STATUS '.$status.'</th>
+              <th     style="width:20%" >#reference '.$ticket_id.'</th>
+                <th style="width: 50%">NAME TICKET '.$title.' description '.$description.'.ticket</th>
+                <th>last updated '.$last_updated.'</th>
+                <th >Attached document</th>
+              </tr>
+            </table>
+          </tr>
+          
+        </th>
+        
+        </section >
+           
+        '
+             ;
+            // <input name=del type=hidden value='".$record['course_code']."';
+
+            $numOfRows++;
+       
+
+
+
+            }
+
+            echo   '<input type="hidden"  name="id" id="id" />';
+          }}}
+
+
+
+
+
+          ?>
 
 
       </section >
@@ -157,5 +219,12 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
       
     </div>
   </form>
+
+
+<footer>
+  
+  <p><a href="reset-password.php" class="btn btn-warning">Reset Your Password</a>
+        <a href="logout.php" class="btn btn-danger">Sign Out of Your Account</a></p>
+</footer>
 </body>
 </html>
