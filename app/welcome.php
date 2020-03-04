@@ -54,11 +54,39 @@ body {font-family: Arial, Helvetica, sans-serif;}
     </ul>
   </nav>
 
+  <p id="tickets">No ticket to display</p>
+
   
 
   
 
 <script>
+
+
+window.onload = function() {
+  
+  var xmlhttp = new XMLHttpRequest();
+
+
+xmlhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+  
+       document.getElementById("tickets").innerHTML = this.responseText;
+ 
+    }
+};
+
+xmlhttp.open("GET", "displayTickets.php"  , true);
+xmlhttp.send();   
+ 
+};
+
+
+setTimeout(location.reload.bind(location), 50000);// reload page every 50000  ms
+
+
+
+
 
 var id = 0;
 
@@ -86,6 +114,8 @@ xmlhttp.onreadystatechange = function() {
 
 xmlhttp.open("POST", "deleteTicket.php?i=" + id , true);
 xmlhttp.send();   
+
+window.location.reload();
  
 
   } else {
@@ -96,154 +126,6 @@ xmlhttp.send();
 
 </script>
 
-  <form  method="post">
-   
-<?php
-
-require_once "config.php";
-
-
-$ticket_id= $status= $title= $description=$assign_to=$username=
-            $priority=$category=$due_date=$last_updated=$created_date=$attached_doc = "";
-
-$numOfRows = 0;
-
-$sql = "SELECT ticket_id, status, title, description, assign_to, username, priority, category, due_date, last_updated, 
-created_date, attached_doc FROM ticket ";
-        
-if($stmt = mysqli_prepare($link, $sql)){
-    
-    // Attempt to execute the prepared statement
-    if(mysqli_stmt_execute($stmt)){
-        // Store result
-        mysqli_stmt_store_result($stmt);
-
-
-        // Check if username exists, if yes then verify password
-        if(mysqli_stmt_num_rows($stmt) >= 1){     
-          
-          
-            // Bind result variables
-            mysqli_stmt_bind_result($stmt, $ticket_id, $status, $title, $description,$assign_to,$username,
-            $priority,$category,$due_date,$last_updated,$created_date,$attached_doc);
-           
-
-            echo '<table border="0" cellspacing="2" cellpadding="4" id="ticketsTable"> <tr> 
-            <td> <font face="Arial">ticket_id</font> </td> 
-            <td> <font face="Arial">status</font> </td> 
-            <td> <font face="Arial">title</font> </td> 
-            <td> <font face="Arial">description</font> </td> 
-            <td> <font face="Arial">assign_to</font> </td> 
-            <td> <font face="Arial">raised_by</font> </td> 
-            <td> <font face="Arial">priority</font> </td> 
-            <td> <font face="Arial">category</font> </td> 
-            <td> <font face="Arial">due_date</font> </td> 
-            <td> <font face="Arial">last_updated</font> </td> 
-            <td> <font face="Arial">created_date</font> </td> 
-            <td> <font face="Arial">attached_doc</font> </td> 
-        </tr>';
-            while($stmt->fetch()){ 
-            
-            //if(mysqli_stmt_fetch($stmt)){
-
-              echo '<tr>
-              <td>'.$ticket_id.'</td><td>'.$status.'</td><td>'.$title.'</td><td>'.$description.'</td><td>'.$assign_to
-              .'</td><td>'.$username.'</td><td>'.$priority.'</td><td>'.$category.'</td><td>'.$due_date.'</td><td>'.
-              $last_updated.'</td><td>'.$created_date.'</td><td>'.$attached_doc.'</td>
-              <td> <input type="submit" name="btn_submit" value="View" id="myBtn" /></td>
-              <td><input type="submit" name="btn_submit" id="'.$numOfRows.'" value="Delete"
-              onClick="display('.$ticket_id.', '.$numOfRows.');"/></td><input name='.$ticket_id.' type=hidden ><td></tr> 
-             ';
-            // <input name=del type=hidden value='".$record['course_code']."';
-
-            $numOfRows++;
-            }
-
-            echo   '<input type="hidden"  name="id" id="id" />';
-
-          }}}
-
-          /*
-
-          if (isset($_REQUEST['btn_submit'])) {
-            
-
-            switch ($_REQUEST['btn_submit']) {
-          
-                case "Change Profile":
-          
-                    $newProfile = $_POST['profile'];
-          
-                $sql = "UPDATE UserT
-                SET profile = '".$newProfile."'
-                WHERE name = '".$savedName."' ";
-            
-                if ($conn->query($sql) === TRUE) {
-            
-                    echo "Profile changed to ".$_POST['profile'];
-                
-                } else {
-                    echo "Error: " . $sql . "<br>" . $conn->error;
-                }
-            
-                $conn->close();
-                     break;
-          
-                    break;
-          
-
-               case "View":
-          
-                echo "good";
-                die;
-                $choice = $_POST['courses'];
-                
-                echo '<br><br>Your favorite dessert(s) is (are) ';
-          
-                $value=0;
-               foreach($choice as $x){
-                   echo $x ." ";
-          
-                   if($x ==="Cake")$value = 1 ;
-                   if($x ==="ice cream")$value = 2 ;
-                   if($x ==="Bread")$value = 3 ;
-                   if($x ==="Fruit salad")$value = 4 ;
-                   if($x ==="Tarte")$value = 5 ;
-          
-                   $sql = "SELECT * FROM Likes WHERE user_id='".$savedId."' HAVING dessert_id='".$value."';" ;
-          
-                    $result = $conn->query($sql);
-          
-                   if ($result->num_rows > 0)  {echo "Likes already registered";}
-                   else{
-                    $sql = "INSERT INTO Likes
-                        (user_id, dessert_id) VALUES ('".$savedId."','".$value."')";
-                        if($conn->query($sql) === TRUE)  echo "Like saved";
-                   }
-                }
-             break;
-
-        case "Delete":
-         
-         
-          //echo $_POST['id'];
-
-          $ticket_id = $_POST['id'];
-
-        
-                   break;
-        
-            }
-          }*/
-          
-?>
-
-
-
-
-
-
-</form>
 
 
             <section>
