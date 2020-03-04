@@ -44,7 +44,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
 
 
 
-<section>
+
   <nav>
     <ul>
       <h2><li><a href="about.html">About</a></li></h2>
@@ -54,83 +54,9 @@ body {font-family: Arial, Helvetica, sans-serif;}
     </ul>
   </nav>
 
-  <p id="tickets">No ticket to display</p>
-
-  
-
-  
-
-<script>
-
-
-window.onload = function() {
-  
-  var xmlhttp = new XMLHttpRequest();
-
-
-xmlhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-  
-       document.getElementById("tickets").innerHTML = this.responseText;
- 
-    }
-};
-
-xmlhttp.open("GET", "displayTickets.php"  , true);
-xmlhttp.send();   
- 
-};
-
-
-setTimeout(location.reload.bind(location), 50000);// reload page every 50000  ms
-
-
-
-
-
-var id = 0;
-
-
-
-document.getElementById("id").value = id;
-
-function display(id, numRow){
-  
-
-  var txt;
-  if (confirm("Are you sure you want to delete "+ document.getElementById("ticketsTable").rows.item(numRow+1).innerHTML.substring(4,220).replace(/\//g, ' ')
-.trim().replace(/< td>/g, " ").replace(/<td>/g, " "))) {
-  
-
-
-  var xmlhttp = new XMLHttpRequest();
-
-
-xmlhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-        //alert(this.responseText);
-    }
-};
-
-xmlhttp.open("POST", "deleteTicket.php?i=" + id , true);
-xmlhttp.send();   
-
-window.location.reload();
- 
-
-  } else {
-    alert("?") //ticket not deleted
-  }
- 
-}
-
-</script>
-
-
-
-            <section>
-            <!-- Trigger/Open The Modal -->
-            <button id="myBtn">Open Modal</button>
+  <section>
+      <!-- Trigger/Open The Modal  DOESNT WORK WITHOUT IT-->
+      <button id="myBtn">Open Modal</button>
             
             <!-- The Modal -->
             <div id="myModal" class="modal">
@@ -138,12 +64,15 @@ window.location.reload();
               <!-- Modal content -->
               <div class="modal-content">
                 <span class="close">&times;</span>
-                <p>Some text in the Modal..</p>
+                <p id="modalView">Some text in the Modal..</p>
               </div>
             
             </div>
-            
-            
+
+  <p id="tickets">No ticket to display</p>
+
+           
+
             <style>
             /* The Modal (background) */
             .modal {
@@ -213,10 +142,74 @@ window.location.reload();
             }
             
             </script>
-            
-            
-            </section>';
 
+</section>
+
+<script>
+
+
+window.onload = function() {
+  
+  var xmlhttp = new XMLHttpRequest();
+
+
+xmlhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+  
+       document.getElementById("tickets").innerHTML = this.responseText;
+ 
+    }
+};
+
+xmlhttp.open("GET", "displayTickets.php"  , true);
+xmlhttp.send();   
+ 
+};
+
+setTimeout(location.reload.bind(location), 50000);// reload page every 50000  ms
+
+var id = 0;
+
+document.getElementById("id").value = id;
+
+function deleteTicket(id, numRow){
+
+    var txt;
+    if (confirm("Are you sure you want to delete "+ document.getElementById("ticketsTable").rows.item(numRow+1).innerHTML.substring(4,206).replace(/\//g, ' ')
+  .trim().replace(/< td>/g, " ").replace(/<td>/g, " ") + " ?")) {
+    
+    var xmlhttp = new XMLHttpRequest();
+
+  xmlhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+          //alert(this.responseText);
+      }
+  };
+
+  xmlhttp.open("POST", "deleteTicket.php?i=" + id , true);
+  xmlhttp.send();   
+
+  window.location.reload();
+  
+    } else {
+      alert("?") //ticket not deleted
+    }
+ 
+}
+
+
+
+function openModal(){
+  //alert("yooo");
+
+  modal.style.display = "block";
+
+  document.getElementById("modalView").innerHTML = "hello";
+
+  
+}
+
+</script>
 
 <footer>
   

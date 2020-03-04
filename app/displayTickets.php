@@ -50,9 +50,12 @@ if($stmt = mysqli_prepare($link, $sql)){
               <td>'.$ticket_id.'</td><td>'.$status.'</td><td>'.$title.'</td><td>'.$description.'</td><td>'.$assign_to
               .'</td><td>'.$username.'</td><td>'.$priority.'</td><td>'.$category.'</td><td>'.$due_date.'</td><td>'.
               $last_updated.'</td><td>'.$created_date.'</td><td>'.$attached_doc.'</td>
-              <td> <input type="submit" name="btn_submit" value="View" id="myBtn" /></td>
+
+              <td><input type="submit" name="btn_submit" id="myBtn" value="View"
+              onClick="openModal('.$ticket_id.', '.$numOfRows.');"/></td><input name='.$ticket_id.' type=hidden ><td>
+              
               <td><input type="submit" name="btn_submit" id="'.$numOfRows.'" value="Delete"
-              onClick="display('.$ticket_id.', '.$numOfRows.');"/></td><input name='.$ticket_id.' type=hidden ><td></tr> 
+              onClick="deleteTicket('.$ticket_id.', '.$numOfRows.');"/></td><input name='.$ticket_id.' type=hidden ><td></tr> 
              ';
             // <input name=del type=hidden value='".$record['course_code']."';
 
