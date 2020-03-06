@@ -28,7 +28,6 @@ body {font-family: Arial, Helvetica, sans-serif;}
 
 </style>
 
-
 </head>
 
 <div class="page-header">
@@ -40,11 +39,6 @@ body {font-family: Arial, Helvetica, sans-serif;}
 <a href="ticket.php" class="btn btn-danger">Add Ticket</a>
 </div>
 </header>
-
-
-
-
-
   <nav>
     <ul>
       <h2><li><a href="about.html">About</a></li></h2>
@@ -63,10 +57,36 @@ body {font-family: Arial, Helvetica, sans-serif;}
             
               <!-- Modal content -->
               <div class="modal-content">
+
                 <span class="close">&times;</span>
                 <p id="modalView">Some text in the Modal..</p>
+
+                <br>
+
+                <span class="close">&times;</span>
+                <p id="modalView">Some text in the Modal..</p>
+
+                <br>
+
+                
+
+                <input  name="id" id="idTicketSelected" />
+
+
+              <textarea>
+              
+              
+              
+              </textarea>
+</form>
+
+              
+<button onClick="answerTicket();">answer</button>
+
+             
               </div>
-            
+
+
             </div>
 
 
@@ -203,16 +223,96 @@ function deleteTicket(id, numRow){
 
 
 
+
 function openModal(id, numRow){
   //alert("yooo");
 
   modal.style.display = "block";
 
-  document.getElementById("modalView").innerHTML = document.getElementById("ticketsTable").rows.item(numRow+1).innerHTML.substring(4,206).replace(/\//g, ' ')
+  var str = document.getElementById("ticketsTable").rows.item(numRow+1).innerHTML.substring(4,206).replace(/\//g, ' ')
+  .trim().replace(/< td>/g, " ").replace(/<td>/g, " ");
+
+  var i = 1;
+
+  var num = "";
+
+
+  while(str!==" "){
+
+    if( str.charAt(i)== " ")
+    {
+
+   str = str.substring(1,i);
+
+   break;
+  
+}
+
+i++;
+
+
+}
+
+
+
+  //str.substring(1, 4);
+
+  window.idTicketSelected = str;
+
+
+
+  document.getElementById("modalView").innerHTML =
+  
+//   str.substr(0,str.indexOf(' '));; 
+document.getElementById("ticketsTable").rows.item(numRow+1).innerHTML.substring(4,206).replace(/\//g, ' ')
   .trim().replace(/< td>/g, " ").replace(/<td>/g, " ");
 
   
 }
+
+
+function answerTicket(){
+
+
+  //.rows.item(numRow+1)
+
+  
+
+
+  var str = idTicketSelected;
+
+  
+
+
+  //str.substr(0,str.indexOf(' '));
+
+
+
+  
+  
+ 
+//alert("Hello "+str);
+
+var text = "dsssd";
+
+
+var xmlhttp = new XMLHttpRequest();
+
+xmlhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        //alert(this.responseText);
+    }
+   else {
+    //alert("?") //ticket not updated
+  }
+}
+xmlhttp.open("POST", "answerTicket.php?a=" +  text+ "&i=" +idTicketSelected, true);
+xmlhttp.send();   
+
+//window.location.reload();
+
+}
+
 
 </script>
 

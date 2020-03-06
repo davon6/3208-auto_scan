@@ -120,7 +120,7 @@ require_once "config.php";
 
 
 
-$ticket_id= $status= $title= $description=$assign_to=
+$ticket_id= $status= $title= $message=$assign_to=
             $priority=$category=$due_date=$last_updated=$created_date=$attached_doc = "";
 
 
@@ -128,7 +128,7 @@ $ticket_id= $status= $title= $description=$assign_to=
 
 $numOfRows = 0;
 
-$sql = "SELECT`ticket_id`,`status`,`title`,`description`,`assign_to`,`username`,`priority`,`category`,`due_date`,`last_updated`,`created_date`,`attached_doc`  FROM `ticket` WHERE `username` LIKE '$username'; ";
+$sql = "SELECT`ticket_id`,`status`,`title`,`message`,`assign_to`,`username`,`priority`,`category`,`due_date`,`last_updated`,`created_date`,`attached_doc`  FROM `ticket` WHERE `username` LIKE '$username'; ";
 
 
 
@@ -149,7 +149,7 @@ $sql = "SELECT`ticket_id`,`status`,`title`,`description`,`assign_to`,`username`,
           
         
             // Bind result variables
-            mysqli_stmt_bind_result($stmt, $ticket_id, $status, $title, $description,$assign_to,$username,
+            mysqli_stmt_bind_result($stmt, $ticket_id, $status, $title, $message,$assign_to,$username,
             $priority,$category,$due_date,$last_updated,$created_date,$attached_doc);
            
 
@@ -176,7 +176,7 @@ $sql = "SELECT`ticket_id`,`status`,`title`,`description`,`assign_to`,`username`,
               <tr>
               <th>STATUS '.$status.'</th>
               <th     style="width:20%" >#reference '.$ticket_id.'</th>
-                <th style="width: 50%">NAME TICKET '.$title.' description '.$description.'.ticket</th>
+                <th style="width: 50%">NAME TICKET '.$title.' Message '.$message.'</th>
                 <th>last updated '.$last_updated.'</th>
                 <th >Attached document</th>
               </tr>
