@@ -56,7 +56,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
 
   <section>
       <!-- Trigger/Open The Modal  DOESNT WORK WITHOUT IT-->
-      <button id="myBtn">Open Modal</button>
+      <input type="hidden" id="myBtn">
             
             <!-- The Modal -->
             <div id="myModal" class="modal">
@@ -68,6 +68,8 @@ body {font-family: Arial, Helvetica, sans-serif;}
               </div>
             
             </div>
+
+
 
   <p id="tickets">No ticket to display</p>
 
@@ -155,7 +157,9 @@ window.onload = function() {
 
 xmlhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
-  
+
+      if(this.responseText ===""){}
+      else
        document.getElementById("tickets").innerHTML = this.responseText;
  
     }
@@ -174,7 +178,7 @@ document.getElementById("id").value = id;
 
 function deleteTicket(id, numRow){
 
-    var txt;
+    //var txt;
     if (confirm("Are you sure you want to delete "+ document.getElementById("ticketsTable").rows.item(numRow+1).innerHTML.substring(4,206).replace(/\//g, ' ')
   .trim().replace(/< td>/g, " ").replace(/<td>/g, " ") + " ?")) {
     
@@ -199,12 +203,13 @@ function deleteTicket(id, numRow){
 
 
 
-function openModal(){
+function openModal(id, numRow){
   //alert("yooo");
 
   modal.style.display = "block";
 
-  document.getElementById("modalView").innerHTML = "hello";
+  document.getElementById("modalView").innerHTML = document.getElementById("ticketsTable").rows.item(numRow+1).innerHTML.substring(4,206).replace(/\//g, ' ')
+  .trim().replace(/< td>/g, " ").replace(/<td>/g, " ");
 
   
 }

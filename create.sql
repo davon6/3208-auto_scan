@@ -1,14 +1,7 @@
 CREATE DATABASE `Auto_scan_db`;
 
 CREATE TABLE IF NOT EXISTS ticket (
-    ticket_id INT PRIMARY KEY AUTO_INCREMENT, status VARCHAR(30), title VARCHAR(30), description VARCHAR(150),
-     assign_to VARCHAR(30), raised_by VARCHAR(30), priority VARCHAR(10), category VARCHAR(15), due_date DATE, 
-     last_updated DATE, created_date DATE, attached_doc BIT, us_id INT FOREIGN KEY REFERENCES users(us_id)
-   
-);
-
-CREATE TABLE IF NOT EXISTS ticket (
-    ticket_id INT PRIMARY KEY AUTO_INCREMENT, status VARCHAR(30), title VARCHAR(30), description VARCHAR(150),
+    ticket_id INT PRIMARY KEY AUTO_INCREMENT, status VARCHAR(30), title VARCHAR(30), content VARCHAR(255),
      assign_to VARCHAR(30), username VARCHAR(50), priority VARCHAR(10), category VARCHAR(15), due_date DATE, 
      last_updated DATE, created_date DATE, attached_doc BIT,
     CONSTRAINT FK_username FOREIGN KEY (username) REFERENCES users (username)
@@ -23,6 +16,8 @@ CREATE TABLE users (
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     userType VARCHAR(10)NOT NULL
 );
+
+
 
 CREATE TABLE IF NOT EXISTS user (
     user_id INT PRIMARY KEY AUTO_INCREMENT, fname VARCHAR(30), name VARCHAR(30), position VARCHAR(30), password VARCHAR(60), username VARCHAR(40)  , email VARCHAR(60)  , phone VARCHAR(60) 
