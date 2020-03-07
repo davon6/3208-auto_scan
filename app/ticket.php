@@ -14,8 +14,8 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 // Include config file
 require_once "config.php";
 
-$title = $description = "";
-$title_err = $description_err = "";
+$title = $message = "";
+$title_err = $message_err = "";
 
 $status = "pending";
 $assign_to =  "";
@@ -41,20 +41,20 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 }
 
 // Check if description is empty
-if(empty(trim($_POST["description"]))){
-    $description_err = "Please enter a description.";
+if(empty(trim($_POST["message"]))){
+    $message_err = "Please enter a message.";
 } else{
-    $description = trim($_POST["description"]);
+    $message = trim($_POST["message"]);
 }
 
 
 // Check input errors before inserting in database
-if(empty($title_err) && empty($description_err) ){
+if(empty($title_err) && empty($message_err) ){
 
     
 
   // Prepare an insert statement
-  $sql = "INSERT INTO ticket (status, title, description, assign_to, username , priority, category, due_date,
+  $sql = "INSERT INTO ticket (status, title, message, assign_to, username , priority, category, due_date,
  last_updated, created_date, attached_doc ) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 
 
@@ -63,7 +63,7 @@ if(empty($title_err) && empty($description_err) ){
    
   if($stmt = mysqli_prepare($link, $sql)){
       // Bind variables to the prepared statement as parameters
-      mysqli_stmt_bind_param($stmt, "ssssssssssi", $param_status, $param_title,$param_description, $param_assign_to, $param_username	,
+      mysqli_stmt_bind_param($stmt, "ssssssssssi", $param_status, $param_title,$param_message, $param_assign_to, $param_username	,
       $param_priority, $param_category, $param_due_date, $param_last_updated, $param_created_date, $param_attached_doc);
 
 
@@ -75,7 +75,7 @@ if(empty($title_err) && empty($description_err) ){
       // Set parameters
       $param_status = $status;
       $param_title = $title;
-      $param_description = $description;
+      $param_message = $message;
       $param_assign_to =$_POST["assignTo"];
       $param_username	 = $username;
       $param_priority = $priority;
@@ -170,8 +170,8 @@ mysqli_close($link);
     
     <br><br>
 
-   Description: <textarea name="description" rows="10" cols="80"></textarea>
-    <span class="help-block"><?php echo $description_err; ?></span>
+   Message: <textarea name="message" rows="10" cols="80"></textarea>
+    <span class="help-block"><?php echo $message_err; ?></span>
     <br><br>
 	
 	<label for="fileInput" class="btn btn-danger" > Add Files </label>

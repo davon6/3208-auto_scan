@@ -28,7 +28,6 @@ body {font-family: Arial, Helvetica, sans-serif;}
 
 </style>
 
-
 </head>
 
 <div class="page-header">
@@ -40,11 +39,6 @@ body {font-family: Arial, Helvetica, sans-serif;}
 <a href="ticket.php" class="btn btn-danger">Add Ticket</a>
 </div>
 </header>
-
-
-
-
-<section>
   <nav>
     <ul>
       <h2><li><a href="about.html">About</a></li></h2>
@@ -54,96 +48,49 @@ body {font-family: Arial, Helvetica, sans-serif;}
     </ul>
   </nav>
 
-  <p id="tickets">No ticket to display</p>
-
-  
-
-  
-
-<script>
-
-
-window.onload = function() {
-  
-  var xmlhttp = new XMLHttpRequest();
-
-
-xmlhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-  
-       document.getElementById("tickets").innerHTML = this.responseText;
- 
-    }
-};
-
-xmlhttp.open("GET", "displayTickets.php"  , true);
-xmlhttp.send();   
- 
-};
-
-
-setTimeout(location.reload.bind(location), 50000);// reload page every 50000  ms
-
-
-
-
-
-var id = 0;
-
-
-
-document.getElementById("id").value = id;
-
-function display(id, numRow){
-  
-
-  var txt;
-  if (confirm("Are you sure you want to delete "+ document.getElementById("ticketsTable").rows.item(numRow+1).innerHTML.substring(4,220).replace(/\//g, ' ')
-.trim().replace(/< td>/g, " ").replace(/<td>/g, " "))) {
-  
-
-
-  var xmlhttp = new XMLHttpRequest();
-
-
-xmlhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-        //alert(this.responseText);
-    }
-};
-
-xmlhttp.open("POST", "deleteTicket.php?i=" + id , true);
-xmlhttp.send();   
-
-window.location.reload();
- 
-
-  } else {
-    alert("?") //ticket not deleted
-  }
- 
-}
-
-</script>
-
-
-
-            <section>
-            <!-- Trigger/Open The Modal -->
-            <button id="myBtn">Open Modal</button>
+  <section>
+      <!-- Trigger/Open The Modal  DOESNT WORK WITHOUT IT-->
+      <input type="hidden" id="myBtn">
             
             <!-- The Modal -->
             <div id="myModal" class="modal">
             
               <!-- Modal content -->
               <div class="modal-content">
+
                 <span class="close">&times;</span>
-                <p>Some text in the Modal..</p>
+                <p id="modalView">Some text in the Modal..</p>
+
+                <br>
+
+                <span class="close">&times;</span>
+                <p id="modalView">Some text in the Modal..</p>
+                <br>
+                <input  name="id" id="idTicketSelected" />
+
+
+              <textarea>
+              
+              
+              
+              </textarea>
+</form>
+
+              
+<button onClick="answerTicket();">answer</button>
+
+             
               </div>
-            
+
+
             </div>
-            
-            
+
+
+
+  <p id="tickets">No ticket to display</p>
+
+           
+
             <style>
             /* The Modal (background) */
             .modal {
@@ -213,10 +160,149 @@ window.location.reload();
             }
             
             </script>
-            
-            
-            </section>';
 
+</section>
+
+<script>
+
+
+window.onload = function() {
+  
+  var xmlhttp = new XMLHttpRequest();
+
+
+xmlhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+
+      if(this.responseText ===""){}
+      else
+       document.getElementById("tickets").innerHTML = this.responseText;
+ 
+    }
+};
+
+xmlhttp.open("GET", "displayTickets.php"  , true);
+xmlhttp.send();   
+ 
+};
+
+setTimeout(location.reload.bind(location), 50000);// reload page every 50000  ms
+
+var id = 0;
+
+document.getElementById("id").value = id;
+
+function deleteTicket(id, numRow){
+
+    //var txt;
+    if (confirm("Are you sure you want to delete "+ document.getElementById("ticketsTable").rows.item(numRow+1).innerHTML.substring(4,206).replace(/\//g, ' ')
+  .trim().replace(/< td>/g, " ").replace(/<td>/g, " ") + " ?")) {
+    
+    var xmlhttp = new XMLHttpRequest();
+
+  xmlhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+          //alert(this.responseText);
+      }
+  };
+
+  xmlhttp.open("POST", "deleteTicket.php?i=" + id , true);
+  xmlhttp.send();   
+
+  window.location.reload();
+  
+    } else {
+      alert("?") //ticket not deleted
+    }
+ 
+}
+
+function openModal(id, numRow){
+  //alert("yooo");
+
+  modal.style.display = "block";
+
+  var str = document.getElementById("ticketsTable").rows.item(numRow+1).innerHTML.substring(4,206).replace(/\//g, ' ')
+  .trim().replace(/< td>/g, " ").replace(/<td>/g, " ");
+
+  var i = 1;
+
+  var num = "";
+
+
+  while(str!==" "){
+
+    if( str.charAt(i)== " ")
+    {
+
+   str = str.substring(1,i);
+
+   break;
+  
+}
+
+i++;
+}
+  //str.substring(1, 4);
+
+  window.idTicketSelected = str;
+
+
+
+  document.getElementById("modalView").innerHTML =
+  
+//   str.substr(0,str.indexOf(' '));; 
+document.getElementById("ticketsTable").rows.item(numRow+1).innerHTML.substring(4,206).replace(/\//g, ' ')
+  .trim().replace(/< td>/g, " ").replace(/<td>/g, " ");
+
+  
+}
+
+
+function answerTicket(){
+
+
+  //.rows.item(numRow+1)
+
+  
+
+
+  var str = idTicketSelected;
+
+  
+
+
+  //str.substr(0,str.indexOf(' '));
+
+
+
+  
+  
+ 
+//alert("Hello "+str);
+
+var text = "dsssd";
+
+
+var xmlhttp = new XMLHttpRequest();
+
+xmlhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        //alert(this.responseText);
+    }
+   else {
+    //alert("?") //ticket not updated
+  }
+}
+xmlhttp.open("POST", "answerTicket.php?a=" +  text+ "&i=" +idTicketSelected, true);
+xmlhttp.send();   
+
+//window.location.reload();
+
+}
+
+
+</script>
 
 <footer>
   

@@ -3,12 +3,12 @@
 require_once "config.php";
 
 
-$ticket_id= $status= $title= $description=$assign_to=$username=
+$ticket_id= $status= $title= $message=$assign_to=$username=
             $priority=$category=$due_date=$last_updated=$created_date=$attached_doc = $str = "";
 
 $numOfRows = 0;
 
-$sql = "SELECT ticket_id, status, title, description, assign_to, username, priority, category, due_date, last_updated, 
+$sql = "SELECT ticket_id, status, title, message, assign_to, username, priority, category, due_date, last_updated, 
 created_date, attached_doc FROM ticket ";
         
 if($stmt = mysqli_prepare($link, $sql)){
@@ -24,7 +24,7 @@ if($stmt = mysqli_prepare($link, $sql)){
           
           
             // Bind result variables
-            mysqli_stmt_bind_result($stmt, $ticket_id, $status, $title, $description,$assign_to,$username,
+            mysqli_stmt_bind_result($stmt, $ticket_id, $status, $title, $message,$assign_to,$username,
             $priority,$category,$due_date,$last_updated,$created_date,$attached_doc);
            
 
@@ -47,12 +47,15 @@ if($stmt = mysqli_prepare($link, $sql)){
             //if(mysqli_stmt_fetch($stmt)){
 
               echo '<tr>
-              <td>'.$ticket_id.'</td><td>'.$status.'</td><td>'.$title.'</td><td>'.$description.'</td><td>'.$assign_to
+              <td>'.$ticket_id.'</td><td>'.$status.'</td><td>'.$title.'</td><td>'.$message.'</td><td>'.$assign_to
               .'</td><td>'.$username.'</td><td>'.$priority.'</td><td>'.$category.'</td><td>'.$due_date.'</td><td>'.
               $last_updated.'</td><td>'.$created_date.'</td><td>'.$attached_doc.'</td>
-              <td> <input type="submit" name="btn_submit" value="View" id="myBtn" /></td>
+
+              <td><input type="submit" name="btn_submit" id="myBtn" value="View"
+              onClick="openModal('.$ticket_id.', '.$numOfRows.');"/></td><input name='.$ticket_id.' type=hidden ><td>
+              
               <td><input type="submit" name="btn_submit" id="'.$numOfRows.'" value="Delete"
-              onClick="display('.$ticket_id.', '.$numOfRows.');"/></td><input name='.$ticket_id.' type=hidden ><td></tr> 
+              onClick="deleteTicket('.$ticket_id.', '.$numOfRows.');"/></td><input name='.$ticket_id.' type=hidden ><td></tr> 
              ';
             // <input name=del type=hidden value='".$record['course_code']."';
 
