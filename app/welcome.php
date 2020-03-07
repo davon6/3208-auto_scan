@@ -65,11 +65,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
 
                 <span class="close">&times;</span>
                 <p id="modalView">Some text in the Modal..</p>
-
                 <br>
-
-                
-
                 <input  name="id" id="idTicketSelected" />
 
 
@@ -221,9 +217,6 @@ function deleteTicket(id, numRow){
  
 }
 
-
-
-
 function openModal(id, numRow){
   //alert("yooo");
 
@@ -249,12 +242,7 @@ function openModal(id, numRow){
 }
 
 i++;
-
-
 }
-
-
-
   //str.substring(1, 4);
 
   window.idTicketSelected = str;

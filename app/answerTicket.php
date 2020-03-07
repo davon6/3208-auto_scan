@@ -6,9 +6,6 @@ $ticket_id = $_REQUEST["i"];
 
 $answer = $_REQUEST["a"];
 
-
-
-
  // Prepare an insert statement
  $sql = "UPDATE ticket SET message=?  WHERE ticket_id = (?)";
  
