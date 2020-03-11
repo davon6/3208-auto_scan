@@ -296,10 +296,6 @@ var countEnd = conversation.length-9;
   document.getElementById("ticketsTable").rows[1].cells[5].innerHTML+ ": "+
    document.getElementById("answer").value;
 
-   alert(msg);
-
-  
-  
 var xmlhttp = new XMLHttpRequest();
 
 xmlhttp.onreadystatechange = function() {
