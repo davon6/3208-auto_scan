@@ -63,13 +63,9 @@ body {font-family: Arial, Helvetica, sans-serif;}
 
                 <br>
 
-                <span class="close">&times;</span>
-                <p id="modalView">Some text in the Modal..</p>
-                <br>
-                <input  name="id" id="idTicketSelected" />
 
 
-              <textarea>
+              <textarea id="answer">
               
               
               
@@ -218,9 +214,31 @@ function deleteTicket(id, numRow){
 }
 
 function openModal(id, numRow){
-  //alert("yooo");
 
   modal.style.display = "block";
+
+  
+  var xmlhttp = new XMLHttpRequest();
+
+
+xmlhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+
+      if(this.responseText ===""){}
+      else
+       document.getElementById("modalView").innerHTML = this.responseText;
+ 
+    }
+};
+
+xmlhttp.open("GET", "selectTicket.php?i=" +id , true);
+xmlhttp.send();   
+ 
+
+
+
+
+
 
   var str = document.getElementById("ticketsTable").rows.item(numRow+1).innerHTML.substring(4,206).replace(/\//g, ' ')
   .trim().replace(/< td>/g, " ").replace(/<td>/g, " ");
@@ -238,7 +256,6 @@ function openModal(id, numRow){
    str = str.substring(1,i);
 
    break;
-  
 }
 
 i++;
@@ -249,11 +266,12 @@ i++;
 
 
 
-  document.getElementById("modalView").innerHTML =
+ /* document.getElementById("modalView").innerHTML =
   
 //   str.substr(0,str.indexOf(' '));; 
-document.getElementById("ticketsTable").rows.item(numRow+1).innerHTML.substring(4,206).replace(/\//g, ' ')
-  .trim().replace(/< td>/g, " ").replace(/<td>/g, " ");
+document.getElementById("ticketsTable").rows.item(numRow+1).innerHTML
+.substring(4,206).replace(/\//g, ' ')
+  .trim().replace(/< td>/g, " ").replace(/<td>/g, " ");*/
 
   
 }
@@ -261,29 +279,27 @@ document.getElementById("ticketsTable").rows.item(numRow+1).innerHTML.substring(
 
 function answerTicket(){
 
-
-  //.rows.item(numRow+1)
+  
 
   
 
 
-  var str = idTicketSelected;
-
-  
-
-
-  //str.substr(0,str.indexOf(' '));
 
 
 
-  
-  
+var conversation =document.getElementById("ticketModal").rows.item(1).innerHTML;
+
+var countEnd = conversation.length-9;
  
-//alert("Hello "+str);
 
-var text = "dsssd";
+   var msg = conversation.substr(4, countEnd) +" "+
+  document.getElementById("ticketsTable").rows[1].cells[5].innerHTML+ ": "+
+   document.getElementById("answer").value;
 
+   alert(msg);
 
+  
+  
 var xmlhttp = new XMLHttpRequest();
 
 xmlhttp.onreadystatechange = function() {
@@ -294,17 +310,23 @@ xmlhttp.onreadystatechange = function() {
     //alert("?") //ticket not updated
   }
 }
-xmlhttp.open("POST", "answerTicket.php?a=" +  text+ "&i=" +idTicketSelected, true);
+xmlhttp.open("POST", "answerTicket.php?a=" +  msg+ "&i=" +idTicketSelected, true);
 xmlhttp.send();   
 
-//window.location.reload();
+modal.style.display = "none";
+window.location.reload();
+
+
 
 }
 
 
 </script>
 
+
+
 <footer>
+
   
   <p><a href="reset-password.php" class="btn btn-warning">Reset Your Password</a>
         <a href="logout.php" class="btn btn-danger">Sign Out of Your Account</a></p>

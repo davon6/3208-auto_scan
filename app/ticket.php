@@ -65,12 +65,6 @@ if(empty($title_err) && empty($message_err) ){
       // Bind variables to the prepared statement as parameters
       mysqli_stmt_bind_param($stmt, "ssssssssssi", $param_status, $param_title,$param_message, $param_assign_to, $param_username	,
       $param_priority, $param_category, $param_due_date, $param_last_updated, $param_created_date, $param_attached_doc);
-
-
-
-
-
-
       
       // Set parameters
       $param_status = $status;

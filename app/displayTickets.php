@@ -46,8 +46,24 @@ if($stmt = mysqli_prepare($link, $sql)){
             
             //if(mysqli_stmt_fetch($stmt)){
 
+               
+               
+               
+              //  <div>first 40 chars <span style="visibility:hidden">last 120 chars</span></div>
+
+
+
+
+
+
               echo '<tr>
-              <td>'.$ticket_id.'</td><td>'.$status.'</td><td>'.$title.'</td><td>'.$message.'</td><td>'.$assign_to
+              <td>'.$ticket_id.'</td><td>'.$status.'</td><td>'.$title.'</td><td> 
+              
+              <div style="width: 60px; text-overflow: ellipsis; white-space: nowrap;
+              overflow: hidden;"> '.$message.'</div>
+              
+              
+             </td><td>'.$assign_to
               .'</td><td>'.$username.'</td><td>'.$priority.'</td><td>'.$category.'</td><td>'.$due_date.'</td><td>'.
               $last_updated.'</td><td>'.$created_date.'</td><td>'.$attached_doc.'</td>
 
@@ -56,7 +72,19 @@ if($stmt = mysqli_prepare($link, $sql)){
               
               <td><input type="submit" name="btn_submit" id="'.$numOfRows.'" value="Delete"
               onClick="deleteTicket('.$ticket_id.', '.$numOfRows.');"/></td><input name='.$ticket_id.' type=hidden ><td></tr> 
-             ';
+             
+           
+             
+             
+             
+              '
+             
+             
+             
+             
+             
+             
+             ;
             // <input name=del type=hidden value='".$record['course_code']."';
 
             $numOfRows++;
