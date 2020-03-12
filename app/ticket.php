@@ -9,8 +9,6 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     exit;
 }
  
-
-
 // Include config file
 require_once "config.php";
 
@@ -44,22 +42,17 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 if(empty(trim($_POST["message"]))){
     $message_err = "Please enter a message.";
 } else{
-    $message = trim($_POST["message"]);
+    $message = $username." : ".trim($_POST["message"]);
 }
 
 
 // Check input errors before inserting in database
 if(empty($title_err) && empty($message_err) ){
 
-    
 
   // Prepare an insert statement
   $sql = "INSERT INTO ticket (status, title, message, assign_to, username , priority, category, due_date,
  last_updated, created_date, attached_doc ) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
-
-
-
-
    
   if($stmt = mysqli_prepare($link, $sql)){
       // Bind variables to the prepared statement as parameters
@@ -83,9 +76,6 @@ if(empty($title_err) && empty($message_err) ){
       if(mysqli_stmt_execute($stmt)){
           // Redirect to welcome page
 
-        
-
-        
           if (  $usertype=== 'admin')
           {
             header("location: welcome.php");
@@ -94,10 +84,6 @@ if(empty($title_err) && empty($message_err) ){
           {
             header("location: homeMember.php");
           };
-
-
-
-
 
       } else{
           echo "Something went wrong. Please try again later.";
@@ -120,8 +106,8 @@ mysqli_close($link);
 <head>
     <link rel="stylesheet" href="../css/css.css">
 <title>Ticket</title>
-<style>
 
+<style>
     div#editor {
       width: 81%;
       margin: auto;
@@ -130,11 +116,6 @@ mysqli_close($link);
   </style>
 
 <script>
-
-
-
-
-
 </script>
 
 </head>
