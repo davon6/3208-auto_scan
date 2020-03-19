@@ -113,12 +113,9 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
                              </tr>
                           </table>
 
-
 <?php
 
 require_once "config.php";
-
-
 
 $ticket_id= $status= $title= $message=$assign_to=
             $priority=$category=$due_date=$last_updated=$created_date=$attached_doc = "";
@@ -129,12 +126,6 @@ $ticket_id= $status= $title= $message=$assign_to=
 $numOfRows = 0;
 
 $sql = "SELECT`ticket_id`,`status`,`title`,`message`,`assign_to`,`username`,`priority`,`category`,`due_date`,`last_updated`,`created_date`,`attached_doc`  FROM `ticket` WHERE `username` LIKE '$username'; ";
-
-
-
-//WHERE username ={ SELECT User_type FROM UserT WHERE = ".$_SESSION["username"]."}
-
-
 
           if($stmt = mysqli_prepare($link, $sql)){
     
@@ -187,26 +178,15 @@ $sql = "SELECT`ticket_id`,`status`,`title`,`message`,`assign_to`,`username`,`pri
         
         </section >
            
-        '
-             ;
+        ';
             // <input name=del type=hidden value='".$record['course_code']."';
 
-            $numOfRows++;
-       
-
-
-
+              $numOfRows++;
             }
 
             echo   '<input type="hidden"  name="id" id="id" />';
           }}}
-
-
-
-
-
-          ?>
-
+?>
 
       </section >
 

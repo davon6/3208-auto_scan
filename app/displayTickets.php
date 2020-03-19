@@ -46,16 +46,6 @@ if($stmt = mysqli_prepare($link, $sql)){
             
             //if(mysqli_stmt_fetch($stmt)){
 
-               
-               
-               
-              //  <div>first 40 chars <span style="visibility:hidden">last 120 chars</span></div>
-
-
-
-
-
-
               echo '<tr>
               <td>'.$ticket_id.'</td><td>'.$status.'</td><td>'.$title.'</td><td> 
               

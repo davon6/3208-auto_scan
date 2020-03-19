@@ -1,5 +1,4 @@
 <?php
-
 require_once "config.php";//CALL DB
 
 $ticket_id = $_REQUEST["i"];
