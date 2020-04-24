@@ -6,9 +6,6 @@ session_start();
 // Include config file
 require_once "config.php";
 
-
-
-
 $title= $_REQUEST["t"];
 $message = $_SESSION["username"]." : ".$_REQUEST["m"];
 $category = $_REQUEST["c"];
