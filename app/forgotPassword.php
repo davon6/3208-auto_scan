@@ -46,7 +46,42 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     // Bind result variables
                     mysqli_stmt_bind_result($stmt, $id, $username, $hashed_password, $userType);
                     if(mysqli_stmt_fetch($stmt)){
-                        if(password_verify($password, $hashed_password)){
+
+
+                        //echo "hello";
+
+                        $sql = "UPDATE users SET password = '666' WHERE username = ?";
+
+                        if($stmt = mysqli_prepare($link, $sql)){
+                            // Bind variables to the prepared statement as parameters
+                            mysqli_stmt_bind_param($stmt, "s", $param_username);
+                            
+                            // Set parameters
+                            
+                            $param_username = $username;
+                        
+                            // Attempt to execute the prepared statement
+                            if(mysqli_stmt_execute($stmt)){
+                                // Redirect to welcome page
+                              //  header("location: welcome.php");
+
+                              echo "done";
+                            } else{
+                                echo "Something went wrong. Please try again later.";
+                            }
+                        }
+
+
+
+
+
+
+
+
+
+
+                        
+                     /*   if(password_verify($password, $hashed_password)){
                             // Password is correct, so start a new session
                             session_start();
 
@@ -73,7 +108,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             // Display an error message if password is not valid
                             $password_err = "The password you entered was not valid.";
                         }
-                    }
+                */    }
                 } else{
                     // Display an error message if username doesn't exist
                     $username_err = "No account found with that username.";
@@ -119,7 +154,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 <span class="help-block"><?php echo $password_err; ?></span>
             </div>
             <div class="form-group">
-                <input type="submit" class="btn btn-primary" value="Login">
+                <input type="submit" class="btn btn-primary" value="Reset Password">
             </div>
             
             <p><a href="login.php">go back to login</a></p>
