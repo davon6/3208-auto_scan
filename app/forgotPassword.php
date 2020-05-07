@@ -1,13 +1,5 @@
 <?php
-// Initialize the session
-session_start();
- 
-// Check if the user is already logged in, if yes then redirect him to welcome page
-if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
-  header("location: welcome.php");
-  exit;
-}
- 
+
 // Include config file
 require_once "config.php";
  
@@ -27,7 +19,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     
     // Check if password is empty
     if(empty(trim($_POST["password"]))){
-        $password_err = "Please enter your password.";
+        $password_err = "Please enter your new password.";
     } else{
         $password = trim($_POST["password"]);
     }
@@ -104,7 +96,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Login</title>
+    <title>Reset Password</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
     <style type="text/css">
         body{ font: 14px sans-serif; }
@@ -113,8 +105,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 </head>
 <body>
     <div class="wrapper">
-        <h2>Login</h2>
-        <p>Please fill in your credentials to login.</p>
+        <h2>Reset Password</h2>
+        <p>Please fill in your credentials to reset your password.</p>
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
             <div class="form-group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
                 <label>Username</label>
@@ -122,15 +114,15 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 <span class="help-block"><?php echo $username_err; ?></span>
             </div>    
             <div class="form-group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
-                <label>Password</label>
+                <label>New password</label>
                 <input type="password" name="password" class="form-control">
                 <span class="help-block"><?php echo $password_err; ?></span>
             </div>
             <div class="form-group">
                 <input type="submit" class="btn btn-primary" value="Login">
             </div>
-            <a href="forgotPassword.php">Forgot password? </a>
-            <p>Don't have an account? <a href="registerAdmin.php">Sign up now</a>.</p>
+            
+            <p><a href="login.php">go back to login</a></p>
             
         </form>
     </div>    
