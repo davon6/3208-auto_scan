@@ -26,16 +26,25 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 <script>
 
 
-function createNewTicket(){
 
-//alert(document.getElementById("category").value);
 
 
 var title = document.getElementById("title").value;
 var message = document.getElementById("message").value;
 var category = document.getElementById("category").value;
 
- 
+/*
+function searchWords(){
+  //message =
+
+  alert("gogo");
+
+}*/
+
+function createNewTicket(){
+
+//alert(document.getElementById("category").value);
+
   if(title=="")
     document.getElementById("valiTitle").innerHTML = "Enter a title";
   else
@@ -111,10 +120,30 @@ if(title != "" & message!=""& category !=0)
     Title: <input type="text" name="title" id="title" >
    <span class="help-block" id="valiTitle"></span>
     
+
+
+
     <br><br>
 
-   Message: <textarea name="message" rows="10" cols="80" id="message"></textarea>
+   Message: <textarea name="message" rows="10" cols="80" id="message" ></textarea>
    <span class="help-block" id="valiMessage"></span>
+
+   <script>
+   
+
+
+    document.getElementById("message").addEventListener("change", function(event) {
+      console.log("Textarea  was changed.");
+      //alert("yo");
+      var message = document.getElementById("message").value;
+
+      var n = message.search("gogo");
+
+      alert(n);
+    });
+
+
+</script>
     
     <br><br>
 	
