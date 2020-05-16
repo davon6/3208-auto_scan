@@ -67,6 +67,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
 </form>
          
 <button onClick="answerTicket();">answer</button>
+<button onClick="setAsCompleted();">Set as completed</button>
 
               </div>
             </div>
@@ -266,6 +267,27 @@ xmlhttp.send();
 modal.style.display = "none";
 window.location.reload();
 }
+
+function setAsCompleted(){
+
+  var xmlhttp = new XMLHttpRequest();
+
+xmlhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        //alert(this.responseText);
+    }
+   else {
+    //alert("?") //ticket not updated
+  }
+}
+xmlhttp.open("POST", "setTicketCompleted.php?i=" +idTicketSelected, true);
+xmlhttp.send();   
+
+modal.style.display = "none";
+window.location.reload();
+}
+
+
 </script>
 
 <footer>
