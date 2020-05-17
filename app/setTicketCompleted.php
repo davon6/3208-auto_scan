@@ -4,18 +4,19 @@ require_once "config.php";//CALL DB
 
 $ticket_id = $_REQUEST["i"];
 
-//$answer = $_REQUEST["a"];
+$last_updated = date("Y/m/d");
 
  // Prepare an insert statement
- $sql = "UPDATE ticket SET status='completed'  WHERE ticket_id = (?)";
+ $sql = "UPDATE ticket SET status='completed', last_updated=?  WHERE ticket_id = (?)";
  
  //echo "you got this ".$ticket_id;
 
   if($stmt = mysqli_prepare($link, $sql)){
       // Bind variables to the prepared statement as parameters
-      mysqli_stmt_bind_param($stmt, "i", $param_ticket_id  );
+      mysqli_stmt_bind_param($stmt, "si", $param_last_updated,  $param_ticket_id  );
       
       // Set parameters
+      $param_last_updated = $last_updated;
       $param_ticket_id = $ticket_id;
   
       // Attempt to execute the prepared statement
