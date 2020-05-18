@@ -243,13 +243,18 @@ i++;
 
 function answerTicket(){
 
+  
+
+
 var conversation =document.getElementById("ticketModal").rows.item(1).innerHTML;
 
+
 var countEnd = conversation.length-9;
- 
+
    var msg = conversation.substr(4, countEnd) +"<br>"+
   document.getElementById("ticketsTable").rows[1].cells[5].innerHTML+ ": "+
    document.getElementById("answer").value;
+
 
 var xmlhttp = new XMLHttpRequest();
 
@@ -266,6 +271,8 @@ xmlhttp.send();
 
 modal.style.display = "none";
 window.location.reload();
+
+
 }
 
 function setAsCompleted(){
