@@ -74,45 +74,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                                 echo "Something went wrong. Please try again later.";
                             }
                         }
-
-
-
-
-
-
-
-
-
-
-                        
-                     /*   if(password_verify($password, $hashed_password)){
-                            // Password is correct, so start a new session
-                            session_start();
-
-                            // Store data in session variables
-                            $_SESSION["loggedin"] = true;
-                            $_SESSION["id"] = $id;
-                            $_SESSION["username"] = $username;   
-                            $_SESSION["userType"] = $userType;     
-                            
-                            if($userType === 'admin')
-                            {
-                                // Redirect user to welcome page
-                                header("location: welcome.php");
-                            }
-                            else if($userType === 'member')
-                            {
-                                // Redirect user to welcome page
-                                header("location: homeMember.php");
-                            }
-
-                            
-                            
-                        } else{
-                            // Display an error message if password is not valid
-                            $password_err = "The password you entered was not valid.";
-                        }
-                */    }
+   }
                 } else{
                     // Display an error message if username doesn't exist
                     $username_err = "No account found with that username.";

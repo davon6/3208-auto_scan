@@ -27,23 +27,11 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 
 
 
-
-
-var title = document.getElementById("title").value;
-var message = document.getElementById("message").value;
-var category = document.getElementById("category").value;
-
-/*
-function searchWords(){
-  //message =
-
-  alert("gogo");
-
-}*/
-
 function createNewTicket(){
 
-//alert(document.getElementById("category").value);
+  var title = document.getElementById("title").value;
+var message = document.getElementById("message").value;
+var category = document.getElementById("category").value;
 
   if(title=="")
     document.getElementById("valiTitle").innerHTML = "Enter a title";
@@ -61,13 +49,10 @@ function createNewTicket(){
       document.getElementById("valiCategory").innerHTML="";
 
 
+
 if(title != "" & message!=""& category !=0)
   {
-
-
-
-
-    
+ 
     var xmlhttp = new XMLHttpRequest();
 
       xmlhttp.onreadystatechange = function() {
@@ -75,9 +60,9 @@ if(title != "" & message!=""& category !=0)
               //alert(this.responseText);
 
               if(this.responseText=='admin')
-                window.location.href = "http://localhost/autoscan2/app/welcome.php";
+                window.location.href = "./welcome.php";
                 else
-                window.location.href = "http://localhost/autoscan2/app/homeMember.php";
+                window.location.href = "./homeMember.php";
           }
           else {
           //alert("error") //ticket not created
@@ -130,8 +115,8 @@ if(title != "" & message!=""& category !=0)
 
    <script>
    
-
-
+/*
+/////TOO KEEP FOR AI
     document.getElementById("message").addEventListener("change", function(event) {
       console.log("Textarea  was changed.");
       //alert("yo");
@@ -141,7 +126,7 @@ if(title != "" & message!=""& category !=0)
 
       alert(n);
     });
-
+*/
 
 </script>
     

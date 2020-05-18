@@ -63,16 +63,7 @@ if($stmt = mysqli_prepare($link, $sql)){
               <td><input type="submit" name="btn_submit" id="'.$numOfRows.'" value="Delete"
               onClick="deleteTicket('.$ticket_id.', '.$numOfRows.');"/></td><input name='.$ticket_id.' type=hidden ><td></tr> 
              
-           
-             
-             
-             
               '
-             
-             
-             
-             
-             
              
              ;
             // <input name=del type=hidden value='".$record['course_code']."';

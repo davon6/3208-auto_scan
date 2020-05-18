@@ -159,7 +159,7 @@ xmlhttp.send();
   
     <div class="container" style="background-color:#f1f1f1">
       <button type="button" style="width:160px; height: 40px">
-          <a style="text-decoration: none"  href="http://localhost/autoscan2/app/ticket.php">Add a ticket</a></button>
+          <a style="text-decoration: none"  href="./ticket.php">Add a ticket</a></button>
       
     </div>
   </form>
