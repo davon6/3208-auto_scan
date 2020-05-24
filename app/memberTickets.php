@@ -50,9 +50,9 @@ $sql = "SELECT`ticket_id`,`status`,`title`,`message`,`assign_to`,`priority`,`cat
             
             //if(mysqli_stmt_fetch($stmt)){
 
-              echo '<table class="table2" >
+              echo '<table id="memberTable" class="table2" >
               <tr>
-              <th class="column" >action1 </th>  <th style="width: 10%" class="column">action2</th> <th class="column">action3<th>
+              <th class="column" ><button onClick="answerTicket()">answer </button></th>
               <th style="width: 20%"class="column">assigned to '.$assign_to.'<br/>name </th>   <th style="width: 20%"class="column">Raised by '.$username.'<br>name  </th>
               <th class="column" style="width: 15%">Priority'.$priority.'<br/>low  </th> <th class="column" style="width: 20%">Category'.$category.'<br/>Support  </th> 
               <th class="column">created on '.$created_date.' <th>action9</th>
@@ -61,13 +61,13 @@ $sql = "SELECT`ticket_id`,`status`,`title`,`message`,`assign_to`,`priority`,`cat
               
           <section style="margin: 1%;  ">
        
-        <table >
+        <table id="memberTicketTable"  >
         <th >
             
               <tr>
               <th>STATUS '.$status.'</th>
               <th     style="width:20%" >#reference '.$ticket_id.'</th>
-                <th style="width: 50%">NAME TICKET '.$title.' Message '.$message.'</th>
+                <th style="width: 10%">NAME TICKET '.$title.'</th><th> Message '.$message.'</th>
                 <th>last updated '.$last_updated.'</th>
                 <th >Attached document</th>
               </tr>

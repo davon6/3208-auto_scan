@@ -10,6 +10,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 ?>
 
 
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,12 +19,18 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 </head>
 
 <div class="page-header">
-        <h1 id="username">Hi, <b ><?php echo htmlspecialchars($_SESSION["username"]); ?></b> </h1>
+        <h1 >Hi, <b id="username"><?php echo htmlspecialchars($_SESSION["username"]); ?></b> </h1>
     </div>
 <body>
+
+
+
+
+
+
     <script>
  
-
+/*
        function myFunction()
        {
 
@@ -35,7 +42,49 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
         location.href="http://google.com";
         alert("after");
 
+       }*/
+
+       
+
+       function answerTicket(){
+
+        var message = prompt("Please enter a comment");
+        
+        var username = document.getElementById("username").innerHTML;
+        
+        var conversation = document.getElementById("memberTicketTable").rows[1].cells[3].innerHTML;
+
+        //alert(conversation.substr(8) +"<br>"+ username + " : " + message);
+
+        var msg = conversation.substr(8) +"<br>"+ username + " : " + message
+
+        
+
+        var ticketId = document.getElementById("memberTicketTable").rows[1].cells[1].innerHTML;
+
+        var xmlhttp = new XMLHttpRequest();
+
+        xmlhttp.onreadystatechange = function() {
+       if (this.readyState == 4 && this.status == 200) {
+        //alert(this.responseText);
+          }
+      else {
+        //alert("?") //ticket not updated
+      }
+      }
+
+      xmlhttp.open("POST", "answerTicket.php?a=" +  msg+ "&i=" +ticketId.substr(11), true);
+      xmlhttp.send();   
+
+      window.location.reload();
+
+
+
        }
+
+
+
+
 
         //onclick="location.href='http://google.com';"
         //action="action_page.php" 
@@ -49,15 +98,15 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 
 <h1>Tickets</h1>
 <p></p>
-<form onsubmit="myFunction()">
+<form>
     <div class="imgcontainer">
       <img src="img_avatar2.png" alt="logo" class="avatar">
     </div>
 
-  
     <div class="container">
-      
       <section style="width: 100%"  >
+
+      
 
                       <table style="width:90%  ;margin: 1%">
                           <tr>
@@ -152,6 +201,8 @@ xmlhttp.send();
 
 
 
+
+
       </section >
 
 
@@ -163,6 +214,7 @@ xmlhttp.send();
       
     </div>
   </form>
+ 
 
 <footer>
   
