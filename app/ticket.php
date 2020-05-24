@@ -119,12 +119,12 @@ if(title != "" & message!=""& category !=0)
 /////TOO KEEP FOR AI
     document.getElementById("message").addEventListener("change", function(event) {
       console.log("Textarea  was changed.");
-      //alert("yo");
+      //alert("changed");
       var message = document.getElementById("message").value;
 
-      var n = message.search("gogo");
+      var n = message.search("a word");
 
-      alert(n);
+      alert("a word");
     });
 */
 

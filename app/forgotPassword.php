@@ -1,5 +1,29 @@
 <?php
 
+
+# Include the Autoloader (see "Libraries" for install instructions)
+require '../vendor/autoload.php';
+use Mailgun\Mailgun;
+# Instantiate the client.
+
+if($_SERVER["REQUEST_METHOD"] == "POST"){
+   
+
+$mgClient = new Mailgun('adefc5e0fe368cd15c3039438f75e4e4-7bce17e5-1976f291');
+$domain = "https://api.mailgun.net/v3/sandbox846554219a284358b28b3fba51744c0b.mailgun.org";
+# Make the call to the client.
+$result = $mgClient->sendMessage($domain, array(
+	'from'	=> 'sandbox846554219a284358b28b3fba51744c0b.mailgun.org',
+	'to'	=> 'damignot@gmail.com',
+	'subject' => 'Hello',
+	'text'	=> 'Testing some Mailgun awesomness!'
+));
+
+
+echo "done";
+
+}
+
 // Include config file
 require_once "config.php";
  
@@ -7,6 +31,10 @@ require_once "config.php";
 $username = $password = $userType= "";
 $username_err = $password_err = "";
  
+
+/*
+
+
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
  
@@ -91,6 +119,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     // Close connection
     mysqli_close($link);
 }
+
+*/
 ?>
  
 <!DOCTYPE html>
@@ -103,8 +133,45 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         body{ font: 14px sans-serif; }
         .wrapper{ width: 350px; padding: 20px; }
     </style>
+
+
+
+
+
+
+
+
 </head>
 <body>
+
+
+
+<script src="https://smtpjs.com/v3/smtp.js"></script>  
+<input type="button" value="Send Email" onclick="sendEmail()">
+
+<script>
+/*
+
+function sendEmail() {
+
+
+Email.send({
+    Host : "smtp.mailtrap.io",
+    Username : "52d5940d2139d5",
+    Password : "363f7457a8a4f0",
+    To : 'damignot@gmail.com',
+    From : "ca61e28732-3bfc4f@inbox.mailtrap.io",
+    Subject : "Test email",
+    Body : "<html><h2>Header</h2><strong>Bold text</strong><br></br><em>Italic</em></html>"
+}).then(
+  message => alert(message)
+);
+}*/
+
+</script>
+
+
+
     <div class="wrapper">
         <h2>Reset Password</h2>
         <p>Please fill in your credentials to reset your password.</p>
