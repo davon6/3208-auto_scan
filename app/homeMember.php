@@ -46,13 +46,25 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 
        
 
-       function answerTicket(){
+       function answerTicket(count){
+
+
+
+         //alert(count);
 
         var message = prompt("Please enter a comment");
         
         var username = document.getElementById("username").innerHTML;
+
+
+        var tableName = "memberTicketTable"+count;
         
-        var conversation = document.getElementById("memberTicketTable").rows[1].cells[3].innerHTML;
+        var conversation = document.getElementById(tableName).rows[1].cells[3].innerHTML;
+
+
+
+
+       
 
         //alert(conversation.substr(8) +"<br>"+ username + " : " + message);
 
@@ -60,7 +72,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 
         
 
-        var ticketId = document.getElementById("memberTicketTable").rows[1].cells[1].innerHTML;
+        var ticketId = document.getElementById(tableName).rows[1].cells[1].innerHTML;
 
         var xmlhttp = new XMLHttpRequest();
 

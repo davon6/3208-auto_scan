@@ -42,6 +42,8 @@ $sql = "SELECT`ticket_id`,`status`,`title`,`message`,`assign_to`,`priority`,`cat
             $priority,$category,$due_date,$last_updated,$created_date,$attached_doc);
            
 
+          $count = 1;
+
           
 
             while($stmt->fetch()){ 
@@ -50,9 +52,13 @@ $sql = "SELECT`ticket_id`,`status`,`title`,`message`,`assign_to`,`priority`,`cat
             
             //if(mysqli_stmt_fetch($stmt)){
 
-              echo '<table id="memberTable" class="table2" >
+              echo '<sectionTicket>
+              
+              
+              
+              <table id="memberTable" class="table2" >
               <tr>
-              <th class="column" ><button onClick="answerTicket()">answer </button></th>
+              <th class="column" ><button onClick="answerTicket('.$count.')">answer </button></th>
               <th style="width: 20%"class="column">assigned to '.$assign_to.'<br/>name </th>   <th style="width: 20%"class="column">Raised by '.$username.'<br>name  </th>
               <th class="column" style="width: 15%">Priority'.$priority.'<br/>low  </th> <th class="column" style="width: 20%">Category'.$category.'<br/>Support  </th> 
               <th class="column">created on '.$created_date.' <th>action9</th>
@@ -61,7 +67,7 @@ $sql = "SELECT`ticket_id`,`status`,`title`,`message`,`assign_to`,`priority`,`cat
               
           <section style="margin: 1%;  ">
        
-        <table id="memberTicketTable"  >
+        <table id="memberTicketTable'.$count.'"  >
         <th >
             
               <tr>
@@ -77,11 +83,14 @@ $sql = "SELECT`ticket_id`,`status`,`title`,`message`,`assign_to`,`priority`,`cat
         </th>
         
         </section >
+
+
+        </sectionTicket>
            
         ';
             // <input name=del type=hidden value='".$record['course_code']."';
 
-              $numOfRows++;
+              $count++;
             }
 
            // echo   '<input type="hidden"  name="id" id="id" />';
