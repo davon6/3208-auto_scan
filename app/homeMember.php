@@ -29,7 +29,42 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 
 
     <script>
+
+
+var username = "<?php echo $_SESSION["username"] ?>";
+
+
+
+
+   
+
+window.onload = function() {
+
+
+    
  
+
+
+        var xmlhttp = new XMLHttpRequest();
+
+
+      xmlhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+
+      if(this.responseText ===""){}
+      else
+      document.getElementById("memberTickets").innerHTML = this.responseText;
+
+      }
+      };
+
+      xmlhttp.open("GET", "memberTickets.php?u=" + username , true);
+      xmlhttp.send();   
+          
+
+
+};
+
 /*
        function myFunction()
        {
@@ -63,9 +98,6 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 
 
 
-
-       
-
         //alert(conversation.substr(8) +"<br>"+ username + " : " + message);
 
         var msg = conversation.substr(8) +"<br>"+ username + " : " + message
@@ -90,9 +122,58 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 
       window.location.reload();
 
+       }
 
+      function selectCategory(){
+
+        var category = document.getElementById("category").value;
+       
+        var username = document.getElementById("username").innerHTML;
+       
+        var xmlhttp = new XMLHttpRequest();
+ 
+        xmlhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+
+      if(this.responseText ==="")
+      {
+        document.getElementById("memberTickets").innerHTML = "No Ticket to display";
+      }
+      else
+       document.getElementById("memberTickets").innerHTML = this.responseText;
+ 
+    }
+};
+
+xmlhttp.open("GET", "memberTicketsbyCategory.php?u=" + username + "&c=" +category , true);
+xmlhttp.send(); 
+
+ 
+if(category===" ")
+       {
+        var xmlhttp = new XMLHttpRequest();
+
+
+          xmlhttp.onreadystatechange = function() {
+          if (this.readyState == 4 && this.status == 200) {
+
+          if(this.responseText ===""){}
+          else
+          document.getElementById("memberTickets").innerHTML = this.responseText;
+
+          }
+          };
+
+          xmlhttp.open("GET", "memberTickets.php?u=" + username , true);
+          xmlhttp.send(); 
+        
 
        }
+
+ 
+
+
+      }   
 
 
 
@@ -160,10 +241,12 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
                                     <section class="inline" style="border: unset">
                                     All Categories
 
-                                    <select style="margin-left: 5%">
+                                    <select style="margin-left: 5%"id="category" onchange="selectCategory()">
 
-                                        <option value="Normal">Select one</option>
-                                        <option value="High">Saab</option>
+                                        <option value=" ">Select one</option>
+                                        <option >Technical Issue</option>
+                                        <option >Software Setup</option>
+                                        <option >Other</option>
                                     </select>
       </section>
 
@@ -181,32 +264,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
                           <script>
 
                           
-                          var username = "<?php echo $_SESSION["username"] ?>";
-
-                         
-
-
-                          window.onload = function() {
-  
-
-
-                            var xmlhttp = new XMLHttpRequest();
-
-
-xmlhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-
-      if(this.responseText ===""){}
-      else
-       document.getElementById("memberTickets").innerHTML = this.responseText;
- 
-    }
-};
-
-xmlhttp.open("GET", "memberTickets.php?u=" + username , true);
-xmlhttp.send();   
- 
-};
+                          
 </script>
 
 

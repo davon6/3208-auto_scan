@@ -1,5 +1,7 @@
-
 <?php
+
+
+
 
 require_once "config.php";
 
@@ -9,12 +11,15 @@ $ticket_id= $status= $title= $message=$assign_to=
 
 $username = $_REQUEST["u"];
 
+$category = $_REQUEST["c"];
+
 
            
 
 //$numOfRows = 0;
 
-$sql = "SELECT`ticket_id`,`status`,`title`,`message`,`assign_to`,`priority`,`category`,`due_date`,`last_updated`,`created_date`,`attached_doc`  FROM `ticket` WHERE `username` LIKE '$username'; ";
+$sql = "SELECT`ticket_id`,`status`,`title`,`message`,`assign_to`,`priority`,`category`,`due_date`,`last_updated`,`created_date`,`attached_doc`  
+FROM `ticket` WHERE `username` LIKE '$username' AND `category` LIKE '$category'; ";
  
 
           if($stmt = mysqli_prepare($link, $sql)){
