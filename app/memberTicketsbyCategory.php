@@ -70,7 +70,7 @@ FROM `ticket` WHERE `username` LIKE '$username' AND `category` LIKE '$category';
               </tr>
               </table >
               
-          <section style="margin: 1%;  ">
+          <section style="margin: 1%;width:98% ; ">
        
         <table id="memberTicketTable'.$count.'"  >
         <th >

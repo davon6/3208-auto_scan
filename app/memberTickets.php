@@ -65,9 +65,9 @@ $sql = "SELECT`ticket_id`,`status`,`title`,`message`,`assign_to`,`priority`,`cat
               </tr>
               </table >
               
-          <section style="margin: 1%;  ">
+          <section style="margin: 1%; width:98% ;">
        
-        <table id="memberTicketTable'.$count.'"  >
+        <table id="memberTicketTable'.$count.'" >
         <th >
             
               <tr>

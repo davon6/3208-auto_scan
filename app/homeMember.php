@@ -88,39 +88,46 @@ window.onload = function() {
          //alert(count);
 
         var message = prompt("Please enter a comment");
+
+
+        if(message === null||message.trim() === "")
+        alert("no message submitted")
+        else
+        {
         
-        var username = document.getElementById("username").innerHTML;
+            var username = document.getElementById("username").innerHTML;
 
 
-        var tableName = "memberTicketTable"+count;
-        
-        var conversation = document.getElementById(tableName).rows[1].cells[3].innerHTML;
+            var tableName = "memberTicketTable"+count;
+            
+            var conversation = document.getElementById(tableName).rows[1].cells[3].innerHTML;
 
 
 
-        //alert(conversation.substr(8) +"<br>"+ username + " : " + message);
+            //alert(conversation.substr(8) +"<br>"+ username + " : " + message);
 
-        var msg = conversation.substr(8) +"<br>"+ username + " : " + message
+            var msg = conversation.substr(8) +"<br>"+ username + " : " + message
 
-        
+            
 
-        var ticketId = document.getElementById(tableName).rows[1].cells[1].innerHTML;
+            var ticketId = document.getElementById(tableName).rows[1].cells[1].innerHTML;
 
-        var xmlhttp = new XMLHttpRequest();
+            var xmlhttp = new XMLHttpRequest();
 
-        xmlhttp.onreadystatechange = function() {
-       if (this.readyState == 4 && this.status == 200) {
-        //alert(this.responseText);
-          }
-      else {
-        //alert("?") //ticket not updated
-      }
-      }
+            xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+              //alert(this.responseText);
+                }
+            else {
+              //alert("?") //ticket not updated
+            }
+            }
 
-      xmlhttp.open("POST", "answerTicket.php?a=" +  msg+ "&i=" +ticketId.substr(11), true);
-      xmlhttp.send();   
+            xmlhttp.open("POST", "answerTicket.php?a=" +  msg+ "&i=" +ticketId.substr(11), true);
+            xmlhttp.send();   
 
-      window.location.reload();
+            window.location.reload();
+        }
 
        }
 
