@@ -23,30 +23,15 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     </div>
 <body>
 
-
-
-
-
-
     <script>
 
 
 var username = "<?php echo $_SESSION["username"] ?>";
 
-
-
-
-   
-
 window.onload = function() {
 
 
-    
- 
-
-
         var xmlhttp = new XMLHttpRequest();
-
 
       xmlhttp.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
@@ -173,27 +158,16 @@ if(category===" ")
 
           xmlhttp.open("GET", "memberTickets.php?u=" + username , true);
           xmlhttp.send(); 
-        
-
+      
        }
-
- 
-
-
       }   
-
-
-
-
-
-        //onclick="location.href='http://google.com';"
-        //action="action_page.php" 
+      
         </script>
         <div class="topnav">
-            <a class="active" href="#home">Home</a>
-            <a href="#news">News</a>
+            <a class="active" href="homeMember.php">Home</a>
+            <a href="news.php">News</a>
             <a href="#contact">Contact</a>
-            <a href="#about">About</a>
+            <a href="about.php">About</a>
           </div>
 
 <h1>Tickets</h1>

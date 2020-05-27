@@ -39,9 +39,9 @@ body {font-family: Arial, Helvetica, sans-serif;}
 </header>
   <nav>
     <ul>
-      <h2><li><a href="about.html">About</a></li></h2>
-      <h2><li><a href="news.html">News</a></li></h2>
-      <h2><li><a href="contact.html">Contact</a></li></h2>
+      <h2><li><a href="about.php">About</a></li></h2>
+      <h2><li><a href="news.php">News</a></li></h2>
+      <h2><li><a href="faq.php">Contact</a></li></h2>
 	  <h2><li><a href="issues.html">Issues</a></li></h2>
     </ul>
   </nav>
@@ -296,6 +296,8 @@ window.location.reload();
 
 
 </script>
+
+<a href="forgotPassword.php">Forgot password? </a>
 
 <footer>
 

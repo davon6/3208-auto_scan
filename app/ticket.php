@@ -29,9 +29,10 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 
 function createNewTicket(){
 
-  var title = document.getElementById("title").value;
+var title = document.getElementById("title").value;
 var message = document.getElementById("message").value;
 var category = document.getElementById("category").value;
+var fileInput = document.getElementById("fileInput").value;
 
   if(title=="")
     document.getElementById("valiTitle").innerHTML = "Enter a title";
@@ -69,7 +70,7 @@ if(title != "" & message!=""& category !=0)
           }
       }
      
-      xmlhttp.open("POST", "createNewTicket.php?t=" +  title+ "&m=" +message+ "&c="+category, true);
+      xmlhttp.open("POST", "createNewTicket.php?t=" +  title+ "&m=" +message+ "&c="+category+ "&f="+fileInput, true);
       xmlhttp.send();   
   }
 }

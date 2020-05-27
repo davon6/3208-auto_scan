@@ -9,6 +9,7 @@ require_once "config.php";
 $title= $_REQUEST["t"];
 $message = $_SESSION["username"]." : ".$_REQUEST["m"];
 $category = $_REQUEST["c"];
+$attached_doc = $_REQUEST["f"];
 
 $status = "pending";
 $assign_to =  "Mike";
@@ -19,7 +20,7 @@ $priority = "Normal";
 $due_date = date("Y/m/d");
 $last_updated = date("Y/m/d");
 $created_date = date("Y/m/d");
-$attached_doc = 0;
+
 
 $usertype =$_SESSION["userType"];
 
