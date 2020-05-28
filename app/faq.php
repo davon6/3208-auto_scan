@@ -8,6 +8,21 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     exit;
 }
 ?>
+<script>
+
+function redirect(){
+
+    var id = document.getElementById("username").innerHTML;
+
+
+  if(id==="admin")
+    window.location.href = "welcome.php";
+    else
+    window.location.href = "homeMember.php";
+
+}
+
+</script>
 
 
 
@@ -19,14 +34,14 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 </head>
 
 <div class="page-header">
-        <h1 >Hi, <b id="username"><?php echo htmlspecialchars($_SESSION["username"]); ?></b> </h1>
+        <h1 style="visibility:hidden;" >Hi, <b id="username"><?php echo htmlspecialchars($_SESSION["userType"]); ?></b> </h1>
     </div>
 <body>
 
         <div class="topnav">
-            <a class="active" href="homeMember.php">Home</a>
+        <a class="active" onclick="redirect();">Home</a>
             <a href="news.php">News</a>
-            <a href="faq.php">Frequently Asked Question</a>
+            <a href="faq.php">Frequently Asked Questions</a>
             <a href="about.php">About</a>
           </div>
 

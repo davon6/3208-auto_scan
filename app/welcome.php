@@ -41,7 +41,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
     <ul>
       <h2><li><a href="about.php">About</a></li></h2>
       <h2><li><a href="news.php">News</a></li></h2>
-      <h2><li><a href="faq.php">Contact</a></li></h2>
+      <h2><li><a href="faq.php">FAQ</a></li></h2>
 	  <h2><li><a href="issues.html">Issues</a></li></h2>
     </ul>
   </nav>

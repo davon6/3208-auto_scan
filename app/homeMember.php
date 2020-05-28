@@ -50,22 +50,6 @@ window.onload = function() {
 
 };
 
-/*
-       function myFunction()
-       {
-
-        alert("whhh");
-        //window.location.href = "http://www.google.com";
-        //location.href="http://google.com";
-        //document.location.href = '/page2.html';
-        location.reload();
-        location.href="http://google.com";
-        alert("after");
-
-       }*/
-
-       
-
        function answerTicket(count){
 
 
@@ -166,7 +150,7 @@ if(category===" ")
         <div class="topnav">
             <a class="active" href="homeMember.php">Home</a>
             <a href="news.php">News</a>
-            <a href="#contact">Contact</a>
+            <a href="faq.php">Frequently Asked Questions</a>
             <a href="about.php">About</a>
           </div>
 
