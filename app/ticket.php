@@ -25,6 +25,18 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 
 <script>
 
+function redirect(){
+
+var id = document.getElementById("username").innerHTML;
+
+
+if(id==="admin")
+window.location.href = "welcome.php";
+else
+window.location.href = "homeMember.php";
+
+}
+
 
 
 function createNewTicket(){
@@ -79,12 +91,18 @@ if(title != "" & message!=""& category !=0)
 
 </head>
 <body>
+<div class="page-header">
+        <h1 style="display:none;" >Hi, <b id="username"><?php echo htmlspecialchars($_SESSION["userType"]); ?></b> </h1>
+    </div>
+<body>
+
         <div class="topnav">
-            <a class="active" href="dashboard.html">Home</a>
-            <a href="#news">News</a>
-            <a href="#contact">Contact</a>
-            <a href="#about">About</a>
+            <a class="active" onclick="redirect();">Home</a>
+            <a href="news.php">News</a>
+            <a href="faq.php">Frequently Asked Questions</a>
+            <a href="about.php">About</a>
           </div>
+
 <h2>New Ticket</h2>
 <p>Please fill in the form below to open a new ticket</p>
 
@@ -116,9 +134,9 @@ if(title != "" & message!=""& category !=0)
 
    <script>
    
-/*
+
 /////TOO KEEP FOR AI
-    document.getElementById("message").addEventListener("change", function(event) {
+  /**  document.getElementById("message").addEventListener("change", function(event) {
       console.log("Textarea  was changed.");
       //alert("changed");
       var message = document.getElementById("message").value;
@@ -127,7 +145,17 @@ if(title != "" & message!=""& category !=0)
 
       alert("a word");
     });
-*/
+
+
+
+
+
+EDM (External Detector Method)----La ICP-MS
+microscope, apart from the Zeiss AxioImager Z2m or M2m
+IDS camera
+Zeiss stages
+
+ */
 
 </script>
     
