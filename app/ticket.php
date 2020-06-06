@@ -135,28 +135,51 @@ if(title != "" & message!=""& category !=0)
    <script>
    
 
-/////TOO KEEP FOR AI
-  /**  document.getElementById("message").addEventListener("change", function(event) {
+      //AI text scan
+      document.getElementById("message").addEventListener("change", function(event) {
       console.log("Textarea  was changed.");
-      //alert("changed");
+
       var message = document.getElementById("message").value;
 
-      var n = message.search("a word");
 
-      alert("a word");
+      //topic 1 EDM (External Detector Method)----La ICP-MS
+      var t1 = message.toUpperCase().search("EDM");
+      var t2 = message.toLowerCase().search("external detector method");
+      var t3 = message.toUpperCase().search("LA ICP-MS");
+      var t4 = message.toUpperCase().search("LA ICP MS");
+
+      if(t1!== -1 || t2!== -1 ||t3!== -1 ||t4!== -1  )
+      if (confirm("A similar topic has been identified from the Frequently Asked Question topic 1, have a look?")) 
+      window.open("faq.php");//TO CHANGE WITH FINAL URL
+ 
+     //topic 2 microscope, apart from the Zeiss AxioImager Z2m or M2m
+      var t2 = message.toUpperCase().search("ZEISS");
+      var t22 = message.toLowerCase().search("axioimager");
+      var t23 = message.toUpperCase().search("Z2M");
+      var t24 = message.toUpperCase().search("M2M");
+
+      if(t2!== -1 || t22!== -1 ||t23!== -1 ||t24!== -1  )
+      if (confirm("A similar topic has been identified from the Frequently Asked Question topic 2, have a look?")) 
+      window.open("faq.php");
+
+      //topic 3 IDS camera
+      var t3 = message.toUpperCase().search("IDS");
+      var t32 = message.toLowerCase().search("camera");
+
+       if(t3!== -1 || t32!== -1 )
+       if (confirm("A similar topic has been identified from the Frequently Asked Question topic 3, have a look?")) 
+      window.open("faq.php");
+
+    
+    //topic 4 Zeiss stages
+      var t4 = message.search("ZEISS");
+      var t42 = message.search("stages");
+
+       if(t4!== -1 || t42!== -1 )
+       if (confirm("A similar topic has been identified from the Frequently Asked Question topic 4, have a look?")) 
+      window.open("faq.php");
+
     });
-
-
-
-
-
-EDM (External Detector Method)----La ICP-MS
-microscope, apart from the Zeiss AxioImager Z2m or M2m
-IDS camera
-Zeiss stages
-
- */
-
 </script>
     
     <br><br>

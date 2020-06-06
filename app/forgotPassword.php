@@ -4,25 +4,59 @@
 # Include the Autoloader (see "Libraries" for install instructions)
 require '../vendor/autoload.php';
 use Mailgun\Mailgun;
-# Instantiate the client.
+
+
+
 
 if($_SERVER["REQUEST_METHOD"] == "POST"){
    
 
-$mgClient = new Mailgun('adefc5e0fe368cd15c3039438f75e4e4-7bce17e5-1976f291');
-$domain = "https://api.mailgun.net/v3/sandbox846554219a284358b28b3fba51744c0b.mailgun.org";
+    /*
+    # Instantiate the client.
+    $mgClient = new Mailgun('adefc5e0fe368cd15c3039438f75e4e4-7bce17e5-1976f291');
+$domain = "sandbox846554219a284358b28b3fba51744c0b.mailgun.org";
+
 # Make the call to the client.
 $result = $mgClient->sendMessage($domain, array(
-	'from'	=> 'sandbox846554219a284358b28b3fba51744c0b.mailgun.org',
-	'to'	=> 'damignot@gmail.com',
+	'from'	=> 'Mailgun Sandbox <postmaster@sandbox846554219a284358b28b3fba51744c0b.mailgun.org>',
+	'to'	=> 'david damignot@gmail.com',
 	'subject' => 'Hello',
 	'text'	=> 'Testing some Mailgun awesomness!'
-));
-
-
-echo "done";
+));*/
 
 }
+ /*
+require 'PHPMailerAutoload.php';
+
+$mail = new PHPMailer;
+
+$mail->isSMTP();                                      // Set mailer to use SMTP
+$mail->Host = 'smtp.mailgun.org';                     // Specify main and backup SMTP servers
+$mail->SMTPAuth = true;                               // Enable SMTP authentication
+$mail->Username = 'postmaster@YOUR_DOMAIN_NAME';   // SMTP username
+$mail->Password = 'secret';                           // SMTP password
+$mail->SMTPSecure = 'tls';                            // Enable encryption, only 'tls' is accepted
+
+$mail->From = 'sandbox846554219a284358b28b3fba51744c0b.mailgun.org';
+$mail->FromName = 'Mailer';
+$mail->addAddress('damignot@gmail.com');                 // Add a recipient
+
+$mail->WordWrap = 50;                                 // Set word wrap to 50 characters
+
+$mail->Subject = 'Hello';
+$mail->Body    = 'Testing some Mailgun awesomness';
+
+if(!$mail->send()) {
+    echo 'Message could not be sent.';
+    echo 'Mailer Error: ' . $mail->ErrorInfo;
+} else {
+    echo 'Message has been sent';
+}
+*/
+
+
+
+
 
 // Include config file
 require_once "config.php";
@@ -145,28 +179,41 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 <body>
 
 
+<script src="https://smtpjs.com/v3/smtp.js"></script>
 
-<script src="https://smtpjs.com/v3/smtp.js"></script>  
 <input type="button" value="Send Email" onclick="sendEmail()">
 
 <script>
-/*
+
 
 function sendEmail() {
+/*
+    Email.send({
+        Host : "smtp.mailgun.org",
+        Username : "postmaster@sandbox846554219a284358b28b3fba51744c0b.mailgun.org",
+        Password : "85b1cb4709f0b4e3b4c47990b46349b4-7bce17e5-0e75c63e",
+        To : 'damignot@gmail.com',
+        From : "sandbox846554219a284358b28b3fba51744c0b.mailgun.org",
+        Subject : "Test email",
+        Body : "<html><h2>Header</h2><strong>Bold text</strong><br></br><em>Italic</em></html>"
+    }).then(
+    message => alert(message)
+    );
+*/
 
+    Email.send({
+        Host : "smtp.mailtrap.io",
+        Username : "52d5940d2139d5",
+        Password : "363f7457a8a4f0",
+        To : 'damignot@gmail.com',
+        From : "ca61e28732-3bfc4f@inbox.mailtrap.io",
+        Subject : "Test email",
+        Body : "<html><h2>Header</h2><strong>Bold text</strong><br></br><em>Italic</em></html>"
+    }).then(
+    message => alert(message)
+    );
 
-Email.send({
-    Host : "smtp.mailtrap.io",
-    Username : "52d5940d2139d5",
-    Password : "363f7457a8a4f0",
-    To : 'damignot@gmail.com',
-    From : "ca61e28732-3bfc4f@inbox.mailtrap.io",
-    Subject : "Test email",
-    Body : "<html><h2>Header</h2><strong>Bold text</strong><br></br><em>Italic</em></html>"
-}).then(
-  message => alert(message)
-);
-}*/
+}
 
 </script>
 
