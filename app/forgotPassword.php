@@ -1,58 +1,18 @@
 <?php
 
+// Import PHPMailer classes into the global namespace
+// These must be at the top of your script, not inside a function
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
 
-# Include the Autoloader (see "Libraries" for install instructions)
+require '../src/Exception.php';
+require '../src/PHPMailer.php';
+require '../src/SMTP.php';
+
+// Load Composer's autoloader
 require '../vendor/autoload.php';
-use Mailgun\Mailgun;
 
-
-
-
-if($_SERVER["REQUEST_METHOD"] == "POST"){
-   
-
-    /*
-    # Instantiate the client.
-    $mgClient = new Mailgun('adefc5e0fe368cd15c3039438f75e4e4-7bce17e5-1976f291');
-$domain = "sandbox846554219a284358b28b3fba51744c0b.mailgun.org";
-
-# Make the call to the client.
-$result = $mgClient->sendMessage($domain, array(
-	'from'	=> 'Mailgun Sandbox <postmaster@sandbox846554219a284358b28b3fba51744c0b.mailgun.org>',
-	'to'	=> 'david damignot@gmail.com',
-	'subject' => 'Hello',
-	'text'	=> 'Testing some Mailgun awesomness!'
-));*/
-
-}
- /*
-require 'PHPMailerAutoload.php';
-
-$mail = new PHPMailer;
-
-$mail->isSMTP();                                      // Set mailer to use SMTP
-$mail->Host = 'smtp.mailgun.org';                     // Specify main and backup SMTP servers
-$mail->SMTPAuth = true;                               // Enable SMTP authentication
-$mail->Username = 'postmaster@YOUR_DOMAIN_NAME';   // SMTP username
-$mail->Password = 'secret';                           // SMTP password
-$mail->SMTPSecure = 'tls';                            // Enable encryption, only 'tls' is accepted
-
-$mail->From = 'sandbox846554219a284358b28b3fba51744c0b.mailgun.org';
-$mail->FromName = 'Mailer';
-$mail->addAddress('damignot@gmail.com');                 // Add a recipient
-
-$mail->WordWrap = 50;                                 // Set word wrap to 50 characters
-
-$mail->Subject = 'Hello';
-$mail->Body    = 'Testing some Mailgun awesomness';
-
-if(!$mail->send()) {
-    echo 'Message could not be sent.';
-    echo 'Mailer Error: ' . $mail->ErrorInfo;
-} else {
-    echo 'Message has been sent';
-}
-*/
 
 
 
@@ -66,28 +26,21 @@ $username = $password = $userType= "";
 $username_err = $password_err = "";
  
 
-/*
 
 
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
- 
-    // Check if username is empty
-    if(empty(trim($_POST["username"]))){
+
+      // Check if username is empty
+      if(empty(trim($_POST["username"]))){
         $username_err = "Please enter username.";
     } else{
         $username = trim($_POST["username"]);
     }
-    
-    // Check if password is empty
-    if(empty(trim($_POST["password"]))){
-        $password_err = "Please enter your new password.";
-    } else{
-        $password = trim($_POST["password"]);
-    }
-    
-    // Validate credentials
-    if(empty($username_err) && empty($password_err)){
+
+
+     // Validate credentials
+     if(empty($username_err)){
         // Prepare a select statement
         $sql = "SELECT us_id, username, password, userType FROM users WHERE username = ?";
         
@@ -101,6 +54,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             // Attempt to execute the prepared statement
             if(mysqli_stmt_execute($stmt)){
                 // Store result
+
+
+              
                 mysqli_stmt_store_result($stmt);
                 
                 // Check if username exists, if yes then verify password
@@ -108,43 +64,40 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     // Bind result variables
                     mysqli_stmt_bind_result($stmt, $id, $username, $hashed_password, $userType);
                     if(mysqli_stmt_fetch($stmt)){
+                     
+                            //session_start();
+
+                         
+                            // Store data in session variables
+                            $_SESSION["loggedin"] = true;
+                            $_SESSION["id"] = $id;
+                            $_SESSION["username"] = $username;   
+                            $_SESSION["userType"] = $userType;   
 
 
-                        //echo "hello";
 
-                       // $password = '666';
+                            $token = bin2hex(random_bytes(16));
 
-                        
+                            echo $token."66";
+                            echo "daaavid";
+                            echo crypt($token,'st');
 
-                        $sql = "UPDATE users SET password = ? WHERE username = ?";
 
-                        if($stmt = mysqli_prepare($link, $sql)){
-                            // Bind variables to the prepared statement as parameters
-                            mysqli_stmt_bind_param($stmt, "ss",$param_password, $param_username);
-                            
-                            // Set parameters
-                            
-                            $param_username = $username;
-                            $param_password = password_hash($password, PASSWORD_DEFAULT);
-                        
-                            // Attempt to execute the prepared statement
-                            if(mysqli_stmt_execute($stmt)){
-                                // Redirect to welcome page
-                               header("location: login.php");
 
-                            } else{
-                                echo "Something went wrong. Please try again later.";
-                            }
+                 
                         }
-   }
+                    }
+                    else
+                    {  // Display an error message if username doesn't exist
+                        $username_err = "No account found with that username.";}
                 } else{
-                    // Display an error message if username doesn't exist
-                    $username_err = "No account found with that username.";
+                  
+                
                 }
             } else{
                 echo "Oops! Something went wrong. Please try again later.";
             }
-        }
+        
         
         // Close statement
         mysqli_stmt_close($stmt);
@@ -152,9 +105,59 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     
     // Close connection
     mysqli_close($link);
+
+    
+ /*
+    // Instantiation and passing `true` enables exceptions
+$mail = new PHPMailer(true);
+
+try {
+
+
+   
+    //Server settings
+    $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      // Enable verbose debug output
+    
+    
+    $mail->IsSMTP(true);
+    $mail->Host = 'smtp.gmail.com'; // not ssl://smtp.gmail.com
+    $mail->SMTPAuth= true;
+    $mail->Username='damignot@gmail.com';
+    $mail->Password='REGARDEMONZIZI69';
+    $mail->Port = 465; // not 587 for ssl 
+    $mail->SMTPDebug = 2; 
+    $mail->SMTPSecure = 'ssl';
+    $mail->SetFrom('dipakapatel.ind@gmail.com', 'Dipak');
+    $mail->AddAddress('damignot@gmail.com', 'HisName');
+    $mail->Subject = 'Hi David';
+    $mail->Subject = "Here is the solution for send mail";
+    $mail->Body    = "This is the HTML message body <b>in gagne!</b>";
+    $mail->AltBody = "This is the body in plain text for non-HTML mail clients";
+    // Name is optional
+  
+
+    // Attachments
+    
+
+    // Content
+    $mail->isHTML(true);                                  // Set email format to HTML
+    $mail->Subject = 'Here is the subject';
+    $mail->Body    = 'This is the HTML message body <b>MIDI-evil888</b>';
+    $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+
+    $mail->send();
+    echo 'Message has been sent';
+} catch (Exception $e) {
+    echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
 }
 
+
+$newURL="login.php";
+header('Location: '.$newURL);
 */
+}
+
+
 ?>
  
 <!DOCTYPE html>
