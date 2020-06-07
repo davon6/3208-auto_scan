@@ -78,10 +78,34 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
                             $token = bin2hex(random_bytes(16));
 
-                            echo $token."66";
-                            echo "daaavid";
-                            echo crypt($token,'st');
+                          
 
+                            $cryptToken = $token;
+                            //echo crypt($token,'st');
+
+                            
+                            $sql = "UPDATE users SET token= ? WHERE username = ?";
+        
+                        
+
+                            if($stmt = mysqli_prepare($link, $sql)){
+                                // Bind variables to the prepared statement as parameters
+                                mysqli_stmt_bind_param($stmt, "ss",$param_cryptToken,$param_username);
+                                
+                                // Set parameters
+                                $param_username = $username;
+                                $param_cryptToken = $cryptToken;
+                                
+                                // Attempt to execute the prepared statement
+                                if(mysqli_stmt_execute($stmt)){
+
+                                }
+
+                            }
+                                    // Store result
+                    
+
+                                
 
 
                  
