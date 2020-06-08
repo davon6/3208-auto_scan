@@ -297,11 +297,11 @@ window.location.reload();
 
 </script>
 
-<a href="forgotPassword.php">Forgot password? </a>
+
 
 <footer>
 
-  <p><a href="reset-password.php" class="btn btn-warning">Reset Your Password</a>
+  <p><a href="reset-password.php" class="btn btn-warning">Reset Password</a>
         <a href="logout.php" class="btn btn-danger">Sign Out of Your Account</a></p>
 </footer>
 

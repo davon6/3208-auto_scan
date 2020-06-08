@@ -99,16 +99,60 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                                 // Attempt to execute the prepared statement
                                 if(mysqli_stmt_execute($stmt)){
 
+
+                                        // Instantiation and passing `true` enables exceptions
+                        $mail = new PHPMailer(true);
+
+                        try {
+
+
+   
+                        //Server settings
+                        $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      // Enable verbose debug output
+                        
+                        
+                        $mail->IsSMTP(true);
+                        $mail->Host = 'smtp.gmail.com'; // not ssl://smtp.gmail.com
+                        $mail->SMTPAuth= true;
+                        $mail->Username='damignot@gmail.com';
+                        $mail->Password='REGARDEMONZIZI69';
+                        $mail->Port = 465; // not 587 for ssl 
+                        $mail->SMTPDebug = 2; 
+                        $mail->SMTPSecure = 'ssl';
+                        $mail->SetFrom('dipakapatel.ind@gmail.com', 'Dipak');
+                        $mail->AddAddress('damignot@gmail.com', 'HisName');
+                        $mail->Subject = 'Hi David';
+                        $mail->Subject = "Here is the solution for send mail";
+                        $mail->Body    = "This is the HTML message body <b>in gagne!</b>";
+                        $mail->AltBody = "This is the body in plain text for non-HTML mail clients";
+                        // Name is optional
+                    
+
+                        // Attachments
+                        
+
+                        // Content
+                        $mail->isHTML(true);                                  // Set email format to HTML
+                        $mail->Subject = 'Here is the subject';
+                        $mail->Body    = '<a href="http://localhost/autoscan2/app/resetPasswordMail.php?t='.$cryptToken.'">click me</a>This is the HTML message body <b>MIDI-evil888</b>'.$cryptToken;
+                        $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+
+                        $mail->send();
+                        echo 'Message has been sent';
+                    } catch (Exception $e) {
+                        echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+                    }
+
+
+                    $newURL="login.php";
+                    header('Location: '.$newURL);
+
+
+
                                 }
 
                             }
-                                    // Store result
-                    
 
-                                
-
-
-                 
                         }
                     }
                     else
@@ -130,55 +174,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     // Close connection
     mysqli_close($link);
 
-    
- /*
-    // Instantiation and passing `true` enables exceptions
-$mail = new PHPMailer(true);
-
-try {
-
-
-   
-    //Server settings
-    $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      // Enable verbose debug output
-    
-    
-    $mail->IsSMTP(true);
-    $mail->Host = 'smtp.gmail.com'; // not ssl://smtp.gmail.com
-    $mail->SMTPAuth= true;
-    $mail->Username='damignot@gmail.com';
-    $mail->Password='REGARDEMONZIZI69';
-    $mail->Port = 465; // not 587 for ssl 
-    $mail->SMTPDebug = 2; 
-    $mail->SMTPSecure = 'ssl';
-    $mail->SetFrom('dipakapatel.ind@gmail.com', 'Dipak');
-    $mail->AddAddress('damignot@gmail.com', 'HisName');
-    $mail->Subject = 'Hi David';
-    $mail->Subject = "Here is the solution for send mail";
-    $mail->Body    = "This is the HTML message body <b>in gagne!</b>";
-    $mail->AltBody = "This is the body in plain text for non-HTML mail clients";
-    // Name is optional
-  
-
-    // Attachments
-    
-
-    // Content
-    $mail->isHTML(true);                                  // Set email format to HTML
-    $mail->Subject = 'Here is the subject';
-    $mail->Body    = 'This is the HTML message body <b>MIDI-evil888</b>';
-    $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
-
-    $mail->send();
-    echo 'Message has been sent';
-} catch (Exception $e) {
-    echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-}
-
-
-$newURL="login.php";
-header('Location: '.$newURL);
-*/
 }
 
 
@@ -204,47 +199,6 @@ header('Location: '.$newURL);
 
 </head>
 <body>
-
-
-<script src="https://smtpjs.com/v3/smtp.js"></script>
-
-<input type="button" value="Send Email" onclick="sendEmail()">
-
-<script>
-
-
-function sendEmail() {
-/*
-    Email.send({
-        Host : "smtp.mailgun.org",
-        Username : "postmaster@sandbox846554219a284358b28b3fba51744c0b.mailgun.org",
-        Password : "85b1cb4709f0b4e3b4c47990b46349b4-7bce17e5-0e75c63e",
-        To : 'damignot@gmail.com',
-        From : "sandbox846554219a284358b28b3fba51744c0b.mailgun.org",
-        Subject : "Test email",
-        Body : "<html><h2>Header</h2><strong>Bold text</strong><br></br><em>Italic</em></html>"
-    }).then(
-    message => alert(message)
-    );
-*/
-
-    Email.send({
-        Host : "smtp.mailtrap.io",
-        Username : "52d5940d2139d5",
-        Password : "363f7457a8a4f0",
-        To : 'damignot@gmail.com',
-        From : "ca61e28732-3bfc4f@inbox.mailtrap.io",
-        Subject : "Test email",
-        Body : "<html><h2>Header</h2><strong>Bold text</strong><br></br><em>Italic</em></html>"
-    }).then(
-    message => alert(message)
-    );
-
-}
-
-</script>
-
-
 
     <div class="wrapper">
         <h2>Reset Password</h2>
