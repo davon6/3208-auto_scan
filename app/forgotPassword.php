@@ -71,11 +71,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
                             $cryptToken = $token;
 
-                            
                             $sql = "UPDATE users SET token= ? WHERE username = ?";
         
-                        
-
                             if($stmt = mysqli_prepare($link, $sql)){
                                 // Bind variables to the prepared statement as parameters
                                 mysqli_stmt_bind_param($stmt, "ss",$param_cryptToken,$param_username);
@@ -107,7 +104,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                         $mail->Port = 465; // not 587 for ssl 
                         $mail->SMTPDebug = 2; 
                         $mail->SMTPSecure = 'ssl';
-                        $mail->SetFrom('dipakapatel.ind@gmail.com', 'Dipak');
+                        $mail->SetFrom('dipakapatel.ind@gmail.com', 'Autoscan');
                         $mail->AddAddress(''.$email.'', ''.$username.'');
                         $mail->Subject = 'Hi '.$username.'';
                         $mail->Subject = "Here is the solution for send mail";
@@ -121,8 +118,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
                         // Content
                         $mail->isHTML(true);                                  // Set email format to HTML
-                        $mail->Subject = 'Here is the subject';
-                        $mail->Body    = 'This link me redirect you to the next step of reseting your password <b> <a href="http://localhost/autoscan2/app/resetPasswordMail.php?t='.$cryptToken.'">click me</a></b>';
+                        $mail->Subject = 'Reseting password';
+                        $mail->Body    = 'Hi '.$username.', this link me redirect you to the next step of reseting your password <b> <a href="http://localhost/autoscan2/app/resetPasswordMail.php?t='.$cryptToken.'">click me</a></b>';
                         $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
                         $mail->send();
