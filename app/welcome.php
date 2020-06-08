@@ -39,15 +39,15 @@ body {font-family: Arial, Helvetica, sans-serif;}
 </header>
   <nav>
     <ul>
-      <h2><li><a href="about.html">About</a></li></h2>
-      <h2><li><a href="news.html">News</a></li></h2>
-      <h2><li><a href="contact.html">Contact</a></li></h2>
+      <h2><li><a href="about.php">About</a></li></h2>
+      <h2><li><a href="news.php">News</a></li></h2>
+      <h2><li><a href="faq.php">FAQ</a></li></h2>
 	  <h2><li><a href="issues.html">Issues</a></li></h2>
     </ul>
   </nav>
 
   <section>
-      <!-- Trigger/Open The Modal  DOESNT WORK WITHOUT IT-->
+      <!-- Trigger/Open The Modal(pop up window when click view button)  DOESNT WORK WITHOUT IT-->
       <input type="hidden" id="myBtn">
             
             <!-- The Modal -->
@@ -67,6 +67,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
 </form>
          
 <button onClick="answerTicket();">answer</button>
+<button onClick="setAsCompleted();">Set as completed</button>
 
               </div>
             </div>
@@ -195,11 +196,6 @@ function deleteTicket(id, numRow){
       alert("?") //ticket not deleted
     }
 
-
-
-
-
- 
 }
 
 function openModal(id, numRow){
@@ -247,14 +243,18 @@ i++;
 
 function answerTicket(){
 
+  
+
+
 var conversation =document.getElementById("ticketModal").rows.item(1).innerHTML;
 
+
 var countEnd = conversation.length-9;
- 
 
    var msg = conversation.substr(4, countEnd) +"<br>"+
   document.getElementById("ticketsTable").rows[1].cells[5].innerHTML+ ": "+
    document.getElementById("answer").value;
+
 
 var xmlhttp = new XMLHttpRequest();
 
@@ -271,12 +271,37 @@ xmlhttp.send();
 
 modal.style.display = "none";
 window.location.reload();
+
+
 }
+
+function setAsCompleted(){
+
+  var xmlhttp = new XMLHttpRequest();
+
+xmlhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        //alert(this.responseText);
+    }
+   else {
+    //alert("?") //ticket not updated
+  }
+}
+xmlhttp.open("POST", "setTicketCompleted.php?i=" +idTicketSelected, true);
+xmlhttp.send();   
+
+modal.style.display = "none";
+window.location.reload();
+}
+
+
 </script>
+
+
 
 <footer>
 
-  <p><a href="reset-password.php" class="btn btn-warning">Reset Your Password</a>
+  <p><a href="reset-password.php" class="btn btn-warning">Reset Password</a>
         <a href="logout.php" class="btn btn-danger">Sign Out of Your Account</a></p>
 </footer>
 

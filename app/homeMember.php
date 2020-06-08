@@ -10,6 +10,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 ?>
 
 
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,46 +19,152 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 </head>
 
 <div class="page-header">
-        <h1>Hi, <b><?php echo htmlspecialchars($_SESSION["username"]); ?></b> </h1>
+        <h1 >Hi, <b id="username"><?php echo htmlspecialchars($_SESSION["username"]); ?></b> </h1>
     </div>
 <body>
+
     <script>
- 
 
-       function myFunction()
-       {
 
-        alert("whhh");
-        //window.location.href = "http://www.google.com";
-        //location.href="http://google.com";
-        //document.location.href = '/page2.html';
-        location.reload();
-        location.href="http://google.com";
-        alert("after");
+var username = "<?php echo $_SESSION["username"] ?>";
+
+window.onload = function() {
+
+
+        var xmlhttp = new XMLHttpRequest();
+
+      xmlhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+
+      if(this.responseText ===""){}
+      else
+      document.getElementById("memberTickets").innerHTML = this.responseText;
+
+      }
+      };
+
+      xmlhttp.open("GET", "memberTickets.php?u=" + username , true);
+      xmlhttp.send();   
+          
+
+
+};
+
+       function answerTicket(count){
+
+
+
+         //alert(count);
+
+        var message = prompt("Please enter a comment");
+
+
+        if(message === null||message.trim() === "")
+        alert("no message submitted")
+        else
+        {
+        
+            var username = document.getElementById("username").innerHTML;
+
+
+            var tableName = "memberTicketTable"+count;
+            
+            var conversation = document.getElementById(tableName).rows[1].cells[3].innerHTML;
+
+
+
+            //alert(conversation.substr(8) +"<br>"+ username + " : " + message);
+
+            var msg = conversation.substr(8) +"<br>"+ username + " : " + message
+
+            
+
+            var ticketId = document.getElementById(tableName).rows[1].cells[1].innerHTML;
+
+            var xmlhttp = new XMLHttpRequest();
+
+            xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+              //alert(this.responseText);
+                }
+            else {
+              //alert("?") //ticket not updated
+            }
+            }
+
+            xmlhttp.open("POST", "answerTicket.php?a=" +  msg+ "&i=" +ticketId.substr(11), true);
+            xmlhttp.send();   
+
+            window.location.reload();
+        }
 
        }
 
-        //onclick="location.href='http://google.com';"
-        //action="action_page.php" 
+      function selectCategory(){
+
+        var category = document.getElementById("category").value;
+       
+        var username = document.getElementById("username").innerHTML;
+       
+        var xmlhttp = new XMLHttpRequest();
+ 
+        xmlhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+
+      if(this.responseText ==="")
+      {
+        document.getElementById("memberTickets").innerHTML = "No Ticket to display";
+      }
+      else
+       document.getElementById("memberTickets").innerHTML = this.responseText;
+ 
+    }
+};
+
+xmlhttp.open("GET", "memberTicketsbyCategory.php?u=" + username + "&c=" +category , true);
+xmlhttp.send(); 
+
+ 
+if(category===" ")
+       {
+        var xmlhttp = new XMLHttpRequest();
+
+
+          xmlhttp.onreadystatechange = function() {
+          if (this.readyState == 4 && this.status == 200) {
+
+          if(this.responseText ===""){}
+          else
+          document.getElementById("memberTickets").innerHTML = this.responseText;
+
+          }
+          };
+
+          xmlhttp.open("GET", "memberTickets.php?u=" + username , true);
+          xmlhttp.send(); 
+      
+       }
+      }   
+      
         </script>
         <div class="topnav">
-            <a class="active" href="#home">Home</a>
-            <a href="#news">News</a>
-            <a href="#contact">Contact</a>
-            <a href="#about">About</a>
+            <a class="active" href="homeMember.php">Home</a>
+            <a href="news.php">News</a>
+            <a href="faq.php">Frequently Asked Questions</a>
+            <a href="about.php">About</a>
           </div>
 
 <h1>Tickets</h1>
 <p></p>
-<form onsubmit="myFunction()">
+<form>
     <div class="imgcontainer">
       <img src="img_avatar2.png" alt="logo" class="avatar">
     </div>
 
-  
     <div class="container">
-      
       <section style="width: 100%"  >
+
+      
 
                       <table style="width:90%  ;margin: 1%">
                           <tr>
@@ -99,10 +206,12 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
                                     <section class="inline" style="border: unset">
                                     All Categories
 
-                                    <select style="margin-left: 5%">
+                                    <select style="margin-left: 5%"id="category" onchange="selectCategory()">
 
-                                        <option value="Normal">Select one</option>
-                                        <option value="High">Saab</option>
+                                        <option value=" ">Select one</option>
+                                        <option >Technical Issue</option>
+                                        <option >Software Setup</option>
+                                        <option >Other</option>
                                     </select>
       </section>
 
@@ -111,101 +220,22 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
                               </tr>
                             </table>
                              </tr>
+
+                           
                           </table>
+                          <p id="memberTickets">No ticket to display</p>
+                          
 
+                          <script>
 
-<?php
-
-require_once "config.php";
-
-
-
-$ticket_id= $status= $title= $message=$assign_to=
-            $priority=$category=$due_date=$last_updated=$created_date=$attached_doc = "";
-
-
-            $username=$_SESSION["username"];
-
-$numOfRows = 0;
-
-$sql = "SELECT`ticket_id`,`status`,`title`,`message`,`assign_to`,`username`,`priority`,`category`,`due_date`,`last_updated`,`created_date`,`attached_doc`  FROM `ticket` WHERE `username` LIKE '$username'; ";
-
-
-
-//WHERE username ={ SELECT User_type FROM UserT WHERE = ".$_SESSION["username"]."}
-
-
-
-          if($stmt = mysqli_prepare($link, $sql)){
-    
-    // Attempt to execute the prepared statement
-    if(mysqli_stmt_execute($stmt)){
-        // Store result
-        mysqli_stmt_store_result($stmt);
-
-
-        // Check if username exists, if yes then verify password
-        if(mysqli_stmt_num_rows($stmt) >= 1){     
-          
-        
-            // Bind result variables
-            mysqli_stmt_bind_result($stmt, $ticket_id, $status, $title, $message,$assign_to,$username,
-            $priority,$category,$due_date,$last_updated,$created_date,$attached_doc);
-           
-
-            while($stmt->fetch()){ 
-            
-            //if(mysqli_stmt_fetch($stmt)){
-
-              echo '<table class="table2" >
-              <tr>
-              <th class="column" >action1 </th>  <th style="width: 10%" class="column">action2</th> <th class="column">action3<th>
-              <th style="width: 20%"class="column">assigned to '.$assign_to.'<br/>name </th>   <th style="width: 20%"class="column">Raised by '.$username.'<br>name  </th>
-              <th class="column" style="width: 15%">Priority'.$priority.'<br/>low  </th> <th class="column" style="width: 20%">Category'.$category.'<br/>Support  </th> 
-              <th class="column">Last updated<'.$last_updated.' <th>action9</th>
-              </tr>
-              </table >
-              
-          <section style="margin: 1%;  ">
-       
-        <table >
-
-
-        <th >
-            
-              <tr>
-              <th>STATUS '.$status.'</th>
-              <th     style="width:20%" >#reference '.$ticket_id.'</th>
-                <th style="width: 50%">NAME TICKET '.$title.' Message '.$message.'</th>
-                <th>last updated '.$last_updated.'</th>
-                <th >Attached document</th>
-              </tr>
-            </table>
-          </tr>
-          
-        </th>
-        
-        </section >
-           
-        '
-             ;
-            // <input name=del type=hidden value='".$record['course_code']."';
-
-            $numOfRows++;
-       
-
-
-
-            }
-
-            echo   '<input type="hidden"  name="id" id="id" />';
-          }}}
+                          
+                          
+</script>
 
 
 
 
 
-          ?>
 
 
       </section >
@@ -215,11 +245,11 @@ $sql = "SELECT`ticket_id`,`status`,`title`,`message`,`assign_to`,`username`,`pri
   
     <div class="container" style="background-color:#f1f1f1">
       <button type="button" style="width:160px; height: 40px">
-          <a style="text-decoration: none"  href="http://localhost/autoscan2/app/ticket.php">Add a ticket</a></button>
+          <a style="text-decoration: none"  href="./ticket.php">Add a ticket</a></button>
       
     </div>
   </form>
-
+ 
 
 <footer>
   

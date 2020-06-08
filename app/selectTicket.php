@@ -12,17 +12,9 @@ $ticket_id = $_REQUEST["i"];
             $priority=$category=$due_date=$last_updated=$created_date=$attached_doc = "";
 
 
-           // $username=$_SESSION["username"];
-
 $numOfRows = 0;
 
 $sql = "SELECT`message` FROM `ticket` WHERE `ticket_id` = '$ticket_id'; ";
-
-
-
-//WHERE username ={ SELECT User_type FROM UserT WHERE = ".$_SESSION["username"]."}
-
-
 
           if($stmt = mysqli_prepare($link, $sql)){
     
@@ -59,59 +51,9 @@ $sql = "SELECT`message` FROM `ticket` WHERE `ticket_id` = '$ticket_id'; ";
                 <td> <font face="Arial">created_date</font> </td> 
                 <td> <font face="Arial">attached_doc</font> </td> 
             </tr>';
-                //while($stmt->fetch()){ 
-                
-                //if(mysqli_stmt_fetch($stmt)){
-    
-                   
-                   
-                   
-                  //  <div>first 40 chars <span style="visibility:hidden">last 120 chars</span></div>
-    
-    
-    
-    
-    
-    
-                  echo 
-                  
-                  
-                  
-                  
+        
+                  echo '<td>'.$message.'</td>';
 
-
-
-                  '<td>'.$message.'</td>'
-                 
-                 
-                  
-                  
-            
-                 
-                 ;
-
-/* <tr>
-                  <td>'.$ticket_id.'</td><td>'.$status.'</td><td>'.$title.'</td><td> 
-                  
-                  <div style="width: 60px; text-overflow: ellipsis; white-space: nowrap;
-                  overflow: hidden;"> '.$message.'</div>
-                  
-                  
-                 </td><td>'.$assign_to
-                  .'</td><td>'.$username.'</td><td>'.$priority.'</td><td>'.$category.'</td><td>'.$due_date.'</td><td>'.
-                  $last_updated.'</td><td>'.$created_date.'</td><td>'.$attached_doc.'</td>
-    
-                */
-
-
-
-
-                // <input name=del type=hidden value='".$record['course_code']."';
-    
-                //$numOfRows++;
-                //}
-    
-               // echo   '<input type="hidden"  name="id" id="id" />';
     
               }
             }
