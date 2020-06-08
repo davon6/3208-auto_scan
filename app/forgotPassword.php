@@ -13,17 +13,12 @@ require '../src/SMTP.php';
 // Load Composer's autoloader
 require '../vendor/autoload.php';
 
-
-
-
-
-
 // Include config file
 require_once "config.php";
  
 // Define variables and initialize with empty values
-$username = $password = $userType= "";
-$username_err = $password_err = "";
+$username = $email =  $userType= "";
+$username_err =  "";
  
 
 
@@ -42,7 +37,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
      // Validate credentials
      if(empty($username_err)){
         // Prepare a select statement
-        $sql = "SELECT us_id, username, password, userType FROM users WHERE username = ?";
+        $sql = "SELECT username, email FROM users WHERE username = ?";
         
         if($stmt = mysqli_prepare($link, $sql)){
             // Bind variables to the prepared statement as parameters
@@ -54,34 +49,27 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             // Attempt to execute the prepared statement
             if(mysqli_stmt_execute($stmt)){
                 // Store result
-
-
               
                 mysqli_stmt_store_result($stmt);
                 
                 // Check if username exists, if yes then verify password
                 if(mysqli_stmt_num_rows($stmt) == 1){                    
                     // Bind result variables
-                    mysqli_stmt_bind_result($stmt, $id, $username, $hashed_password, $userType);
+                    mysqli_stmt_bind_result($stmt, $username, $email);
                     if(mysqli_stmt_fetch($stmt)){
                      
                             //session_start();
 
                          
                             // Store data in session variables
-                            $_SESSION["loggedin"] = true;
-                            $_SESSION["id"] = $id;
                             $_SESSION["username"] = $username;   
-                            $_SESSION["userType"] = $userType;   
+                            $_SESSION["email"] = $email;   
 
 
-
+                            //generate token
                             $token = bin2hex(random_bytes(16));
 
-                          
-
                             $cryptToken = $token;
-                            //echo crypt($token,'st');
 
                             
                             $sql = "UPDATE users SET token= ? WHERE username = ?";
@@ -120,8 +108,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                         $mail->SMTPDebug = 2; 
                         $mail->SMTPSecure = 'ssl';
                         $mail->SetFrom('dipakapatel.ind@gmail.com', 'Dipak');
-                        $mail->AddAddress('damignot@gmail.com', 'HisName');
-                        $mail->Subject = 'Hi David';
+                        $mail->AddAddress(''.$email.'', ''.$username.'');
+                        $mail->Subject = 'Hi '.$username.'';
                         $mail->Subject = "Here is the solution for send mail";
                         $mail->Body    = "This is the HTML message body <b>in gagne!</b>";
                         $mail->AltBody = "This is the body in plain text for non-HTML mail clients";
@@ -134,7 +122,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                         // Content
                         $mail->isHTML(true);                                  // Set email format to HTML
                         $mail->Subject = 'Here is the subject';
-                        $mail->Body    = '<a href="http://localhost/autoscan2/app/resetPasswordMail.php?t='.$cryptToken.'">click me</a>This is the HTML message body <b>MIDI-evil888</b>'.$cryptToken;
+                        $mail->Body    = 'This link me redirect you to the next step of reseting your password <b> <a href="http://localhost/autoscan2/app/resetPasswordMail.php?t='.$cryptToken.'">click me</a></b>';
                         $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
                         $mail->send();
@@ -209,11 +197,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 <input type="text" name="username" class="form-control" value="<?php echo $username; ?>">
                 <span class="help-block"><?php echo $username_err; ?></span>
             </div>    
-            <div class="form-group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
-                <label>New password</label>
-                <input type="password" name="password" class="form-control">
-                <span class="help-block"><?php echo $password_err; ?></span>
-            </div>
             <div class="form-group">
                 <input type="submit" class="btn btn-primary" value="Reset Password">
             </div>
