@@ -172,17 +172,7 @@ if(category===" ")
                         <table >
                             <tr>
                               <th style="width: 80%">
-                                  <section class="inline" style="border: unset">
-
-                                  action
-
-                                      <select style="margin-left: 12%">
-
-                                          <option value="Normal">Select one</option>
-                                          <option value="High">Saab</option>
-                                      </select>
-
-                                  </section></th>
+                                
                               
                             </tr>
                           </table>
@@ -190,18 +180,7 @@ if(category===" ")
                         <th >
                                 <table >
                               <tr>
-                                <th style="width: 80%">
-                                    <section class="inline" style="border: unset">
-
-                                    Sort by
-
-                                    <select style="margin-left: 12%">
-
-                                        <option value="Normal">Select</option>
-                                        <option value="High">Saab</option>
-                                    </select>
-                                    </section>
-                                </th>
+                              
                                 <th style="padding-right:130px">
                                     <section class="inline" style="border: unset">
                                     All Categories
@@ -216,7 +195,7 @@ if(category===" ")
       </section>
 
                                 </th>
-                                <th style="align-content: left" >1-6</th>
+                               
                               </tr>
                             </table>
                              </tr>

@@ -37,20 +37,7 @@ $sql = "SELECT`message` FROM `ticket` WHERE `ticket_id` = '$ticket_id'; ";
             if(mysqli_stmt_fetch($stmt)){
 
        
-                echo '<table border="0" cellspacing="2" cellpadding="4" id="ticketModal"> <tr> 
-                <td> <font face="Arial">ticket_id</font> </td> 
-                <td> <font face="Arial">status</font> </td> 
-                <td> <font face="Arial">title</font> </td> 
-                <td> <font face="Arial">description</font> </td> 
-                <td> <font face="Arial">assign_to</font> </td> 
-                <td> <font face="Arial">raised_by</font> </td> 
-                <td> <font face="Arial">priority</font> </td> 
-                <td> <font face="Arial">category</font> </td> 
-                <td> <font face="Arial">due_date</font> </td> 
-                <td> <font face="Arial">last_updated</font> </td> 
-                <td> <font face="Arial">created_date</font> </td> 
-                <td> <font face="Arial">attached_doc</font> </td> 
-            </tr>';
+             
         
                   echo '<td>'.$message.'</td>';
 

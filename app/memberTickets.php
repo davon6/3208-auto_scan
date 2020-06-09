@@ -61,7 +61,7 @@ $sql = "SELECT`ticket_id`,`status`,`title`,`message`,`assign_to`,`priority`,`cat
               <th class="column" ><button onClick="answerTicket('.$count.')">answer </button></th>
               <th style="width: 20%"class="column">assigned to '.$assign_to.'<br/>name </th>   <th style="width: 20%"class="column">Raised by '.$username.'<br>name  </th>
               <th class="column" style="width: 15%">Priority'.$priority.'<br/>low  </th> <th class="column" style="width: 20%">Category'.$category.'<br/>Support  </th> 
-              <th class="column">created on '.$created_date.' <th>action9</th>
+              <th class="column">created on '.$created_date.'
               </tr>
               </table >
               
