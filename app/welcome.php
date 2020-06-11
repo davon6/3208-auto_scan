@@ -47,9 +47,12 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
      <a href="about.php">About</a>
     <a href="news.php">News</a>
      <a href="faq.php">FAQ</a>
-	 <a href="issues.html">Issues</a>
     
   </div>
+
+  <p>TICKET RAISED</p>
+  <br>
+  <p id="numberTicketRaised"></p>
 
   <section>
       <!-- Trigger/Open The Modal(pop up window when click view button)  DOESNT WORK WITHOUT IT-->
@@ -154,6 +157,31 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 <script>
 
 window.onload = function() {
+
+
+  var xmlhttp = new XMLHttpRequest();
+
+xmlhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById("numberTicketRaised").innerHTML = this.responseText;
+
+        //
+    }
+};
+
+xmlhttp.open("GET", "numberTicketRaised.php" , true);
+xmlhttp.send();   
+
+//window.location.reload();
+
+
+
+
+
+
+
+
+
   
   var xmlhttp = new XMLHttpRequest();
 
