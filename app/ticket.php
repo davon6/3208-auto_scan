@@ -105,6 +105,7 @@ if(title != "" & message!=""& category !=0)
             <a href="news.php">News</a>
             <a href="faq.php">Frequently Asked Questions</a>
           </div>
+          
 
 <h2>New Ticket</h2>
 <p>Please fill in the form below to open a new ticket</p>
@@ -289,5 +290,9 @@ if(title != "" & message!=""& category !=0)
     </section>
   <input type="submit" onClick="createNewTicket();return false;" >
 </form>
+
+<div class="page-header">
+        <h1 style="visibility:hidden;" >Hi, <b id="username"><?php echo htmlspecialchars($_SESSION["userType"]); ?></b> </h1>
+    </div>
 </body>
 </html>
