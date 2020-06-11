@@ -98,7 +98,12 @@ $sql = "SELECT`ticket_id`,`status`,`title`,`message`,`assign_to`,`priority`,`cat
 
 
          }
+         else
+         echo "no ticket to display";
         
         
-        }}
+        
+        }
+      
+      }
 ?>

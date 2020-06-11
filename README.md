@@ -8,6 +8,7 @@
 # WARNING YOU MUST RUN registerAdmin.php to register an admin the other is for members only
 
 
-
-# need to encrypt user info when passed in url
-# no exception management for input
+# to configure forgot password admin must use his email
+# with gmail manage lesss secure app connection through this link https://myaccount.google.com/lesssecureapps (must be loggedin)
+# in forgotpassword.php email and password must be input      $mail->Username='damignot@gmail.com';
+                        $mail->Password='REGARDEMONZIZI69';

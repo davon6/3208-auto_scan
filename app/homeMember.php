@@ -50,16 +50,18 @@ window.onload = function() {
       xmlhttp.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
 
-      if(this.responseText ==="") {}
+
+        alert(document.getElementById("memberTickets").value);
+       
+
+      if(this.responseText ==="no ticket to display") {
+
+       
+        document.getElementById("categorySorting").style.display = "none";
+      }
       else
       document.getElementById("memberTickets").innerHTML = this.responseText;
 
-
-      if (document.getElementById("memberTickets").value ===undefined )        
-       {
-        document.getElementById("categorySorting").style.display = "none";
-        document.getElementById("memberTickets").innerHTML= "No ticket to display";
-       }
       }
       };
 

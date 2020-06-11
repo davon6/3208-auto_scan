@@ -99,8 +99,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                         $mail->IsSMTP(true);
                         $mail->Host = 'smtp.gmail.com'; // not ssl://smtp.gmail.com
                         $mail->SMTPAuth= true;
-                        $mail->Username='damignot@gmail.com';
-                        $mail->Password='REGARDEMONZIZI69';
+                        $mail->Username='abrutidgeek@gmail.com';
+                        $mail->Password='ICECREAM99';
                         $mail->Port = 465; // not 587 for ssl 
                         $mail->SMTPDebug = 2; 
                         $mail->SMTPSecure = 'ssl';
