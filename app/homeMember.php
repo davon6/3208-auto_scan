@@ -45,18 +45,27 @@ var username = "<?php echo $_SESSION["username"] ?>";
 
 window.onload = function() {
 
-
         var xmlhttp = new XMLHttpRequest();
 
       xmlhttp.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
 
-      if(this.responseText ===""){}
+      if(this.responseText ==="") {}
       else
       document.getElementById("memberTickets").innerHTML = this.responseText;
 
+
+      if (document.getElementById("memberTickets").value ===undefined )        
+       {
+        document.getElementById("categorySorting").style.display = "none";
+        document.getElementById("memberTickets").innerHTML= "No ticket to display";
+       }
       }
       };
+
+
+      //if( document.getElementById("memberTickets").value=="")
+     // document.getElementById("memberTickets").innerHTML= "No ticket to display";
 
       xmlhttp.open("GET", "memberTickets.php?u=" + username , true);
       xmlhttp.send();   
@@ -195,7 +204,7 @@ if(category===" ")
                                 <table >
                               <tr>
                               
-                                <th style="padding-right:130px">
+                                <th  id="categorySorting" style="padding-right:130px">
                                     <section class="inline" style="border: unset">
                                     All Categories
 

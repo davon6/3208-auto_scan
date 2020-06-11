@@ -20,7 +20,3 @@ CREATE TABLE users (
 );
 
 
-
-CREATE TABLE IF NOT EXISTS user (
-    user_id INT PRIMARY KEY AUTO_INCREMENT, fname VARCHAR(30), name VARCHAR(30), position VARCHAR(30), password VARCHAR(60), username VARCHAR(40)  , email VARCHAR(60)  , phone VARCHAR(60) 
-);
