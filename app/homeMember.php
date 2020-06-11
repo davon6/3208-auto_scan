@@ -51,7 +51,7 @@ window.onload = function() {
       if (this.readyState == 4 && this.status == 200) {
 
 
-        alert(document.getElementById("memberTickets").value);
+        //alert(document.getElementById("memberTickets").value);
        
 
       if(this.responseText ==="no ticket to display") {
