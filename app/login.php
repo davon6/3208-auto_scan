@@ -12,7 +12,7 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
 require_once "config.php";
  
 // Define variables and initialize with empty values
-$username = $password = "";
+$username = $password = $userType= "";
 $username_err = $password_err = "";
  
 // Processing form data when form is submitted
@@ -35,7 +35,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     // Validate credentials
     if(empty($username_err) && empty($password_err)){
         // Prepare a select statement
-        $sql = "SELECT id, username, password FROM users WHERE username = ?";
+        $sql = "SELECT us_id, username, password, userType FROM users WHERE username = ?";
         
         if($stmt = mysqli_prepare($link, $sql)){
             // Bind variables to the prepared statement as parameters
@@ -52,19 +52,31 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 // Check if username exists, if yes then verify password
                 if(mysqli_stmt_num_rows($stmt) == 1){                    
                     // Bind result variables
-                    mysqli_stmt_bind_result($stmt, $id, $username, $hashed_password);
+                    mysqli_stmt_bind_result($stmt, $id, $username, $hashed_password, $userType);
                     if(mysqli_stmt_fetch($stmt)){
                         if(password_verify($password, $hashed_password)){
                             // Password is correct, so start a new session
                             session_start();
-                            
+
                             // Store data in session variables
                             $_SESSION["loggedin"] = true;
                             $_SESSION["id"] = $id;
-                            $_SESSION["username"] = $username;                            
+                            $_SESSION["username"] = $username;   
+                            $_SESSION["userType"] = $userType;     
                             
-                            // Redirect user to welcome page
-                            header("location: welcome.php");
+                            if($userType === 'admin')
+                            {
+                                // Redirect user to welcome page
+                                header("location: welcome.php");
+                            }
+                            else if($userType === 'member')
+                            {
+                                // Redirect user to welcome page
+                                header("location: homeMember.php");
+                            }
+
+                            
+                            
                         } else{
                             // Display an error message if password is not valid
                             $password_err = "The password you entered was not valid.";
@@ -95,11 +107,18 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <title>Login</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
     <style type="text/css">
-        body{ font: 14px sans-serif; }
+        body{ font: 16px sans-serif;
+        background-color:#ffcc5c;		}
+		.containerlogin{margin-top:5%;
+	margin-left:30%;
+
+	text-align:center;}
         .wrapper{ width: 350px; padding: 20px; }
+		
     </style>
 </head>
 <body>
+<div class="containerlogin">
     <div class="wrapper">
         <h2>Login</h2>
         <p>Please fill in your credentials to login.</p>
@@ -117,8 +136,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             <div class="form-group">
                 <input type="submit" class="btn btn-primary" value="Login">
             </div>
-            <p>Don't have an account? <a href="register.php">Sign up now</a>.</p>
+            <a href="forgotPassword.php">Forgot password? </a>
+          
+            <p>Don't have an account? <a href="registerMember.php">Sign up now</a>.</p>
+            
         </form>
-    </div>    
+    </div> 
+	</div>
+
 </body>
 </html>
