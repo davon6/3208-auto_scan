@@ -183,9 +183,9 @@ if(title != "" & message!=""& category !=0)
         //topic 5 extra word scans Laser Ablation + Inductively Coupled Plasma Mass Spectrometer
       var t5 = message.toLowerCase().search("laser");
       var t52 = message.toLowerCase().search("ablation");
-      var t53 = message.toLowerCase().search("Inductively");
+      var t53 = message.toLowerCase().search("inductively");
       var t54 = message.toLowerCase().search("plasma");
-      var t55 = message.toLowerCase().search("Spectrometer");
+      var t55 = message.toLowerCase().search("spectrometer");
       var t56 = message.toLowerCase().search("tears");
 
       if(t5!== -1 || t52!== -1 ||t53!== -1 ||t54!== -1 || t55!== -1 ||t56!== -1 )
