@@ -21,6 +21,12 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
       margin: auto;
       text-align: left;
     }
+	body{
+		background-color:#ffcc5c;	
+	}
+	.topnav{
+		background-color:#ff6f69;
+	}
   </style>
 
 <script>
@@ -138,6 +144,51 @@ if(title != "" & message!=""& category !=0)
 
       var message = document.getElementById("message").value;
 
+      var words="";
+
+      /*
+
+      var t1 = message.toUpperCase().search("EDM");
+
+
+      if( t1!== -1)
+      words = words +"?EDM";
+
+      if( t2!== -1)
+      words = words +"?external?detector?method";
+
+      if( t3!== -1)
+      words = words +"?LA?ICP-MS";
+
+      if( t4!== -1)
+      words = words +"?LA?ICP?MS";
+
+      if( t2!== -1)
+      words = words +"?LA?ICP?MS";
+
+      if( t22!== -1)
+      words = words +"?LA?ICP?MS";
+
+      if( t23!== -1)
+      words = words +"?LA?ICP?MS";
+
+      if( t24!== -1)
+      words = words +"?LA?ICP?MS";
+
+
+
+
+
+
+
+
+
+
+      alert(words);
+
+*/
+      
+
 
       //topic 1 EDM (External Detector Method)----La ICP-MS
       var t1 = message.toUpperCase().search("EDM");
@@ -147,7 +198,7 @@ if(title != "" & message!=""& category !=0)
 
       if(t1!== -1 || t2!== -1 ||t3!== -1 ||t4!== -1  )
       if (confirm("A similar topic has been identified from the Frequently Asked Question topic 1, have a look?")) 
-      window.open("faq.php");//TO CHANGE WITH FINAL URL
+      window.open("faq.php?TOPIC1");//TO CHANGE WITH FINAL URL
  
      //topic 2 microscope, apart from the Zeiss AxioImager Z2m or M2m
       var t2 = message.toUpperCase().search("ZEISS");
@@ -157,7 +208,7 @@ if(title != "" & message!=""& category !=0)
 
       if(t2!== -1 || t22!== -1 ||t23!== -1 ||t24!== -1  )
       if (confirm("A similar topic has been identified from the Frequently Asked Question topic 2, have a look?")) 
-      window.open("faq.php");
+      window.open("faq.php?TOPIC2");
 
       //topic 3 IDS camera
       var t3 = message.toUpperCase().search("IDS");
@@ -165,7 +216,7 @@ if(title != "" & message!=""& category !=0)
 
        if(t3!== -1 || t32!== -1 )
        if (confirm("A similar topic has been identified from the Frequently Asked Question topic 3, have a look?")) 
-      window.open("faq.php");
+      window.open("faq.php?TOPIC3");
 
     
     //topic 4 Zeiss stages
@@ -174,7 +225,7 @@ if(title != "" & message!=""& category !=0)
 
        if(t4!== -1 || t42!== -1 )
        if (confirm("A similar topic has been identified from the Frequently Asked Question topic 4, have a look?")) 
-      window.open("faq.php");
+      window.open("faq.php?TOPIC4");
 
 
 
@@ -190,7 +241,38 @@ if(title != "" & message!=""& category !=0)
 
       if(t5!== -1 || t52!== -1 ||t53!== -1 ||t54!== -1 || t55!== -1 ||t56!== -1 )
        if (confirm("A similar topic has been identified from the Frequently Asked Question , have a look?")) 
-      window.open("faq.php");
+      window.open("faq.php?TOPIC5");
+
+
+
+
+
+
+/*
+
+      var xmlhttp = new XMLHttpRequest();
+
+      xmlhttp.onreadystatechange = function() {
+          if (this.readyState == 4 && this.status == 200) {
+              //alert(this.responseText);
+              //window.open("faq.php?w='important'");
+
+      
+          }
+          else {
+          //alert("error") //ticket not created
+          }
+      }
+     
+      xmlhttp.open("GET", "faq.php?w=" +  "important", true);
+      xmlhttp.send();  
+
+*/
+ 
+
+      //window.open("faq.php");
+
+      
 
 
     });
