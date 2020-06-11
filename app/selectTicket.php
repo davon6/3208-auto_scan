@@ -39,7 +39,7 @@ $sql = "SELECT`message` FROM `ticket` WHERE `ticket_id` = '$ticket_id'; ";
        
              
         
-                  echo '<td>'.$message.'</td>';
+                  echo $message;
 
     
               }
