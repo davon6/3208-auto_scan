@@ -119,7 +119,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                         // Content
                         $mail->isHTML(true);                                  // Set email format to HTML
                         $mail->Subject = 'Reseting password';
-                        $mail->Body    = 'Hi '.$username.', this link me redirect you to the next step of reseting your password <b> <a href="http://localhost/autoscan2/app/resetPasswordMail.php?t='.$cryptToken.'">click me</a></b>';
+                        $mail->Body    = 'Hi '.$username.', this link will redirect you to the next step of reseting your password <b> <a href="http://localhost/autoscan2/app/resetPasswordMail.php?t='.$cryptToken.'">click me</a></b>';
                         $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
                         $mail->send();
@@ -187,7 +187,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
     <div class="wrapper">
         <h2>Reset Password</h2>
-        <p>Please fill in your credentials to reset your password.</p>
+        <p>Please fill in your credentials to email you a link to reset your password.</p>
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
             <div class="form-group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
                 <label>Username</label>

@@ -19,21 +19,35 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     
     <style type="text/css">
         body{ font: 14px sans-serif; text-align: center; 
-		background-color:#ffcc5c;
+		background-color:#e5e7e9;
 		font-family: Arial, Helvetica, sans-serif;}
 		{
   box-sizing: border-box;
 }
 .containerat{
-		background-color:#ffeead;
+		background-color:#e5e7e9;
+		
+		margin-left:5%;
+		margin-right:5%;
 	text-align:center;}
 		.topnav{
-		background-color:#ff6f69;
+		background-color:#3498db;
+		margin-left:5%;
+		margin-right:5%;
 	}
 	footer{
-		background-color:#88d8b0;
+		background-color:#77bfe2;
+		padding:5px;
+		margin-left:5%;
+		margin-right:5%;
 	}
-
+	.page-header{
+		text-align:center;
+	}
+	h1{
+		text-align:center;
+	}
+    
 </style>
 
 </head>

@@ -28,7 +28,7 @@ if($stmt = mysqli_prepare($link, $sql)){
             $priority,$category,$due_date,$last_updated,$created_date,$attached_doc);
            
 
-            echo '<table border="0" cellspacing="2" cellpadding="4" id="ticketsTable"> <tr> 
+            echo '<table border="0" cellspacing="2" cellpadding="4" id="ticketsTable" style="margin-bottom:25px;"> <tr> 
             <td> <font face="Arial">ticket_id</font> </td> 
             <td> <font face="Arial">status</font> </td> 
             <td> <font face="Arial">title</font> </td> 
@@ -50,7 +50,7 @@ if($stmt = mysqli_prepare($link, $sql)){
               <td>'.$ticket_id.'</td><td>'.$status.'</td><td>'.$title.'</td><td> 
               
               <div style="width: 60px; text-overflow: ellipsis; white-space: nowrap;
-              overflow: hidden;"> '.$message.'</div>
+              overflow: hidden;padding: 20%;"> '.$message.'</div>
               
               
              </td><td>'.$assign_to
@@ -60,9 +60,9 @@ if($stmt = mysqli_prepare($link, $sql)){
               <td><input type="submit" name="btn_submit" id="myBtn" value="View"
               onClick="openModal('.$ticket_id.', '.$numOfRows.');"/></td><input name='.$ticket_id.' type=hidden ><td>
               
-              <td><input type="submit" name="btn_submit" id="'.$numOfRows.'" value="Delete"
+              <td ><input type="submit" name="btn_submit" id="'.$numOfRows.'" value="Delete"
               onClick="deleteTicket('.$ticket_id.', '.$numOfRows.');"/></td><input name='.$ticket_id.' type=hidden ><td></tr> 
-             
+         
               '
              
              ;
@@ -71,7 +71,7 @@ if($stmt = mysqli_prepare($link, $sql)){
             $numOfRows++;
             }
 
-            echo   '<input type="hidden"  name="id" id="id" />';
+            echo   '<input type="hidden"  name="id" id="id" />  <br>';
 
           }}}
 
