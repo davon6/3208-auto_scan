@@ -294,8 +294,12 @@ var conversation =document.getElementById("modalView").innerHTML;
 
 //var countEnd = conversation.length-9;
 
+
+
+
+
    var msg = conversation +"<br>"+
-  document.getElementById("ticketsTable").rows[1].cells[5].innerHTML+ ": "+
+   "<?php echo $_SESSION["username"] ;?>"+ ": "+
    document.getElementById("answer").value;
 
 
