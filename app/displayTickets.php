@@ -47,7 +47,7 @@ if($stmt = mysqli_prepare($link, $sql)){
             //if(mysqli_stmt_fetch($stmt)){
 
               echo '<tr>
-              <td>'.$ticket_id.'</td><td>'.$status.'</td><td>'.$title.'</td><td> 
+              <td>'.$ticket_id.'</td><td>'.$status.'</td><td style="padding:30px;">'.$title.'</td><td> 
               
               <div style="width: 60px; text-overflow: ellipsis; white-space: nowrap;
               overflow: hidden;padding: 20%;"> '.$message.'</div>
