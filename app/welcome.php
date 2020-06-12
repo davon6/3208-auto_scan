@@ -58,7 +58,6 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 
   <div class="topnav">
    
-     <a href="about.php">About</a>
     <a href="news.php">News</a>
      <a href="faq.php">FAQ</a>
     
