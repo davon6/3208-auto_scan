@@ -6,7 +6,7 @@
 
 
 # to configure forgot password admin must use his email
-# with gmail manage lesss secure app connection through this link https://myaccount.google.com/lesssecureapps (must be loggedin)
+# with gmail manage less secure app connection through this link https://myaccount.google.com/lesssecureapps (must be loggedin)
 # in forgotpassword.php email and password must be input      $mail->Username='@gmail.com';<---TO FILL>
 #                                                             $mail->Password='';<---TO FILL>
 
