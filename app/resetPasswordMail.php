@@ -5,118 +5,7 @@
 $new_password = $confirm_password = "";
 $new_password_err = $confirm_password_err = "";
 
-/*
-$isTouch = isset($_REQUEST["t"]);
 
-if($isTouch)
-{}
-else
-header("location: http://localhost/autoscan2/app/login.php");
-
-*/
-
-//$isTouch = isset($_REQUEST["t"]);
-
-//if($isTouch = empty($_REQUEST["t"]))
-//header("location: http://localhost/autoscan2/app/login.php");
-
-
-
-//echo isset($_REQUEST["t"]).'ffff';
-
-
-//if(isset($_REQUEST["t"]))
-//{
-   
-
-
-
-
-
-
-
-
-
-//}
-//else
-   // header("location: http://localhost/autoscan2/app/login.php");
-
-
-/*
-// Initialize the session
-session_start();
- 
-// Check if the user is logged in, otherwise redirect to login page
-if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
-    header("location: login.php");
-    exit;
-}
- 
-// Include config file
-require_once "config.php";
-
- 
-
-// Processing form data when form is submitted
-if($_SERVER["REQUEST_METHOD"] == "POST"){
-
- 
-    // Validate new password
-    if(empty(trim($_POST["new_password"]))){
-        $new_password_err = "Please enter the new password.";     
-    } elseif(strlen(trim($_POST["new_password"])) < 6){
-        $new_password_err = "Password must have atleast 6 characters.";
-    } else{
-        $new_password = trim($_POST["new_password"]);
-    }
-    
-    // Validate confirm password
-    if(empty(trim($_POST["confirm_password"]))){
-        $confirm_password_err = "Please confirm the password.";
-    } else{
-        $confirm_password = trim($_POST["confirm_password"]);
-        if(empty($new_password_err) && ($new_password != $confirm_password)){
-            $confirm_password_err = "Password did not match.";
-        }
-    }
-        
-    // Check input errors before updating the database
-    if(empty($new_password_err) && empty($confirm_password_err)){
-        // Prepare an update statement
-        $sql = "UPDATE users SET password = ? WHERE token = ?";
-
-        
-
-        
-        if($stmt = mysqli_prepare($link, $sql)){
-            // Bind variables to the prepared statement as parameters
-            mysqli_stmt_bind_param($stmt, "ss", $param_password, $param_token);
-            
-            // Set parameters
-            $param_password = password_hash($new_password, PASSWORD_DEFAULT);
-            $param_token = $_REQUEST["t"];
-
-
-            //echo  $param_password.'  '.$param_token;
-            
-            // Attempt to execute the prepared statement
-            if(mysqli_stmt_execute($stmt)){
-                // Password updated successfully. Destroy the session, and redirect to login page
-                session_destroy();
-                header("location: login.php");
-                exit();
-            } else{
-                echo "Oops! Something went wrong. Please try again later.";
-            }
-        }
-        
-        // Close statement
-        mysqli_stmt_close($stmt);
-    }
-    
-    // Close connection
-    mysqli_close($link);
-}*/
 ?>
  
 <!DOCTYPE html>
@@ -133,12 +22,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     
     function changePassword()
     {
-       // alert(document.getElementById("token").innerHTML+ "  "+ document.getElementById("new_password").value);
-        //alert(document.getElementById("new_password").value);
-
-
-        //if(document.getElementById("token").innerHTML==="")
-      //  alert("oo");
+      
 
       var xmlhttp = new XMLHttpRequest();
 
@@ -146,7 +30,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
       xmlhttp.onreadystatechange = function() {
           if (this.readyState == 4 && this.status == 200) {
-              alert(this.responseText);
+              window.location.href = "./login.php"; 
+             
 /*
               if(this.responseText=='admin')
                 window.location.href = "./welcome.php";
@@ -159,11 +44,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
       }
      //?t=" +  "title"+ "&m=" +"message
 
-      alert(document.getElementById("token").innerHTML+ "&w=" + document.getElementById("new_password").value);
+      //alert(document.getElementById("token").innerHTML+ "&w=" + document.getElementById("new_password").value);
 
      
       xmlhttp.open("POST", "resetPassword.php?t=" +  document.getElementById("token").innerHTML+ "&w=" + document.getElementById("new_password").value, true);
-      xmlhttp.send();   
+      xmlhttp.send();  
+      
+      alert("Your password has been changed");
+       
 
         
 
@@ -193,7 +81,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             </div>
             <div class="form-group">
                 <input type="submit" class="btn btn-primary" value="Submit" onclick="changePassword();">
-                <a class="btn btn-link" href="welcome.php">Cancel</a>
+                <a class="btn btn-link" href="login.php">login</a>
             </div>
         </form>
 

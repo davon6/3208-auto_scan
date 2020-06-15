@@ -35,19 +35,36 @@ function redirect(){
 <title>FAQ</title>
 <style>
     
-	body{
-		background-color:#ffcc5c;	
-	}
-	.topnav{
-		background-color:#ff6f69;
-	}
-	.containerat{
-		background-color:#ffeead;
+	body{ font: 14px sans-serif; text-align: center; 
+		background-color:#e5e7e9;
+		font-family: Arial, Helvetica, sans-serif;}
+		{
+  box-sizing: border-box;
+}
+.containerat{
+		background-color:#e5e7e9;
+		
+		margin-left:5%;
+		margin-right:5%;
 	text-align:center;}
-	footer{
-		background-color:#88d8b0;
+		.topnav{
+		background-color:#3498db;
+		margin-left:5%;
+		margin-right:5%;
 	}
-
+	footer{
+		background-color:#77bfe2;
+		padding:5px;
+		margin-left:5%;
+		margin-right:5%;
+	}
+	.page-header{
+		text-align:center;
+	}
+	h1{
+		text-align:center;
+	}
+	
   .highlight {
   background-color: yellow;
 }
@@ -92,10 +109,6 @@ function redirect(){
             <a href="faq.php">Frequently Asked Questions</a>
           </div>
 
-          <div class="imgcontainer">
-      <img src="img_avatar2.png" alt="logo" class="avatar">
-    </div>
-
 
 <h1>Frequently Asked Questions</h1>
 
@@ -107,6 +120,7 @@ function redirect(){
 <br>
 <br>
 <br>
+<div class=containerat>
 TOPIC1. Does your system handle both the tradition EDM (External Detector Method) technique, as well as the newer La ICP-MS (Laser Ablation + Inductively Coupled Plasma Mass Spectrometer) technique ?
 The answer would be that it DOES. And this is important, as the traditional EDM technique requires the use of a slow neutron reactor. But these are being closed down in many countries.
 On the other hand, the equipment required for La ICP-MS is expensive. But then again, many universities and research institutes already have some of these.
@@ -136,7 +150,7 @@ Also, our stages required an external stage motion controller. Whereas the Zeiss
 
 
 
-
+</div>
 
   
 <footer>

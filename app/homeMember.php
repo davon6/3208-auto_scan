@@ -18,18 +18,34 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 <title>Dashboard</title>
 <style>
     
-	body{
-		background-color:#ffcc5c;	
-	}
-	.topnav{
-		background-color:#ff6f69;
-	}
-	.containerat{
-		background-color:#ffeead;
-	text-align:center;}
-	footer{
-		background-color:#88d8b0;
-	}
+    body{
+      background-color:#e5e7e9;	
+    }
+    .topnav{
+      background-color:#3498db;
+      margin-left:5%;
+      margin-right:5%;
+    }
+    
+    .container{
+      margin-left:5%;
+      margin-right:5%;
+      padding:10px;
+      background-color:#;
+    text-align:center;}
+    footer{
+      background-color:#77bfe2;
+      padding:5px;
+      margin-left:5%;
+      margin-right:5%;
+    }
+    .page-header{
+      text-align:center;
+    }
+    h1{
+      text-align:center;
+    }
+    </style>
   </style>
 </head>
 
@@ -139,7 +155,7 @@ window.onload = function() {
 
       if(this.responseText ==="")
       {
-        document.getElementById("memberTickets").innerHTML = "No Ticket to display";
+        document.getElementById("memberTickets").innerHTML = "no ticket to display";
       }
       else
        document.getElementById("memberTickets").innerHTML = this.responseText;
@@ -182,9 +198,7 @@ if(category===" ")
 <h1>Tickets</h1>
 <p></p>
 <form>
-    <div class="imgcontainer">
-      <img src="img_avatar2.png" alt="logo" class="avatar">
-    </div>
+    
 
     <div class="container">
       <section style="width: 100%"  >
@@ -257,8 +271,11 @@ if(category===" ")
 
 <footer>
   
-  <p><a href="reset-password.php" class="btn btn-warning">Reset Your Password</a>
-        <a href="logout.php" class="btn btn-danger">Sign Out of Your Account</a></p>
+<button type="button" style="width:160px; height: 40px">
+  <a href="reset-password.php" class="btn btn-warning">Reset Password</a></button>
+<button type="button" style="width:160px; height: 40px">
+		<a href="logout.php" class="btn btn-danger">Sign Out</a></button>
+
 </footer>
 </body>
 </html>

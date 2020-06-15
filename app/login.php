@@ -108,12 +108,15 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
     <style type="text/css">
         body{ font: 16px sans-serif;
-        background-color:#ffcc5c;		}
+        background-color:#e5e7e9;		}
 		.containerlogin{margin-top:5%;
+		
 	margin-left:30%;
 
 	text-align:center;}
-        .wrapper{ width: 350px; padding: 20px; }
+        .wrapper{ width: 400px; padding: 10px; 
+		border-style: groove;
+		}
 		
     </style>
 </head>

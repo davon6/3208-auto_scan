@@ -22,10 +22,19 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
       text-align: left;
     }
 	body{
-		background-color:#ffcc5c;	
+		background-color:#e5e7e9;	
 	}
 	.topnav{
-		background-color:#ff6f69;
+		background-color:#3498db;
+	}
+	
+	.container{
+		padding:10px;
+		background-color:#;
+	text-align:center;}
+	footer{
+		background-color:#77bfe2;
+		padding:5px;
 	}
   </style>
 
@@ -147,48 +156,7 @@ if(title != "" & message!=""& category !=0)
 
       var words="";
 
-      /*
 
-      var t1 = message.toUpperCase().search("EDM");
-
-
-      if( t1!== -1)
-      words = words +"?EDM";
-
-      if( t2!== -1)
-      words = words +"?external?detector?method";
-
-      if( t3!== -1)
-      words = words +"?LA?ICP-MS";
-
-      if( t4!== -1)
-      words = words +"?LA?ICP?MS";
-
-      if( t2!== -1)
-      words = words +"?LA?ICP?MS";
-
-      if( t22!== -1)
-      words = words +"?LA?ICP?MS";
-
-      if( t23!== -1)
-      words = words +"?LA?ICP?MS";
-
-      if( t24!== -1)
-      words = words +"?LA?ICP?MS";
-
-
-
-
-
-
-
-
-
-
-      alert(words);
-
-*/
-      
 
 
       //topic 1 EDM (External Detector Method)----La ICP-MS

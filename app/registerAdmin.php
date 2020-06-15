@@ -131,21 +131,20 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <title>Sign Up</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
     <style type="text/css">
-        body{ font: 14px sans-serif; 
-		background-color:#ffcc5c;	
-	}
-     .containerre{
-		 margin: auto;
-  width: 60%;
-  border: 3px solid #ea9b67;
- margin-top:7%;
+        body{ font: 14px sans-serif;
+background-color:#e5e7e9;		}
+.containerlog{margin-top:5%;
 		
-	 }
-	 .wrapper{ width: 350px; padding: 20px; }
+	margin-left:30%;
+
+	text-align:center;}
+        .wrapper{ width: 400px; padding: 10px;
+border-style: groove;		}
     </style>
 </head>
 <body>
-<div class="containerre">
+<div class="containerlog">
+
     <div class="wrapper">
         <h2>Sign Up</h2>
         <p>Please fill this form to create an account.</p>

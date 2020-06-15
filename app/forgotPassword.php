@@ -116,10 +116,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                         // Attachments
                         
 
+                        //line 124 MUST BE CHANGED WITH NEW URL
+
                         // Content
                         $mail->isHTML(true);                                  // Set email format to HTML
                         $mail->Subject = 'Reseting password';
-                        $mail->Body    = 'Hi '.$username.', this link will redirect you to the next step of reseting your password <b> <a href="http://localhost/autoscan2/app/resetPasswordMail.php?t='.$cryptToken.'">click me</a></b>';
+                        $mail->Body    = 'Hi '.$username.', this link will redirect you to the next step of reseting your password <b> <a href="http://localhost/autoscan/app/resetPasswordMail.php?t='.$cryptToken.'">click me</a></b>';
                         $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
                         $mail->send();
@@ -171,19 +173,18 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <title>Reset Password</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
     <style type="text/css">
-        body{ font: 14px sans-serif; }
-        .wrapper{ width: 350px; padding: 20px; }
+        body{ font: 14px sans-serif;
+background-color:#e5e7e9;; }
+		.containerl{margin-top:5%;		
+	margin-left:30%;
+	text-align:center;}
+        .wrapper{ width: 400px; padding: 10px;
+border-style: groove;}
     </style>
-
-
-
-
-
-
-
 
 </head>
 <body>
+<div class="containerl">
 
     <div class="wrapper">
         <h2>Reset Password</h2>
@@ -202,5 +203,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             
         </form>
     </div>    
+    </div>
 </body>
 </html>
