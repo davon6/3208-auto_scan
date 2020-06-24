@@ -12,11 +12,58 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 require_once "config.php";
  
 // Define variables and initialize with empty values
-$new_password = $confirm_password = "";
-$new_password_err = $confirm_password_err = "";
+$new_password = $confirm_password = $old_password = "";
+$new_password_err = $confirm_password_err =  $old_password_err="";
  
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
+
+
+    // Check if password is empty
+    if(empty(trim($_POST["old_password"]))){
+        $old_password_err = "Please enter your old password.";
+    } else{
+        $old_password = trim($_POST["old_password"]);
+
+
+   
+        
+
+     
+         // Prepare a select statement
+         $sql = "SELECT  password FROM users WHERE username = ?";
+        
+         if($stmt = mysqli_prepare($link, $sql)){
+             // Bind variables to the prepared statement as parameters
+             mysqli_stmt_bind_param($stmt, "s", $param_username);
+             
+             // Set parameters
+             $param_username = $_SESSION["username"];
+             
+             // Attempt to execute the prepared statement
+             if(mysqli_stmt_execute($stmt)){
+                 // Store result
+                 mysqli_stmt_store_result($stmt);
+                 
+                 // Check if username exists, if yes then verify password
+                 if(mysqli_stmt_num_rows($stmt) == 1){                    
+                     // Bind result variables
+                     mysqli_stmt_bind_result($stmt, $hashed_password);
+                     if(mysqli_stmt_fetch($stmt)){
+                         if(password_verify($old_password, $hashed_password)){
+
+                            
+                         }
+                         else
+                         $old_password_err = "Your old password is incorrect if forgotten select forgot password in login page";
+                     }}}}
+
+
+
+    }
+
+
+
 
 
     
@@ -41,7 +88,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     }
         
     // Check input errors before updating the database
-    if(empty($new_password_err) && empty($confirm_password_err)){
+    if(empty($new_password_err) && empty($confirm_password_err)&& empty($old_password_err)){
         // Prepare an update statement
         $sql = "UPDATE users SET password = ? WHERE us_id = ?";
 
@@ -101,6 +148,19 @@ border-style: groove;}
         <h2>Reset Password</h2>
         <p>Please fill out this form to reset your password.</p>
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post"> 
+
+
+        <div class="form-group <?php echo (!empty($old_password_err)) ? 'has-error' : ''; ?>">
+                <label>Old Password</label>
+                <input type="password" name="old_password" class="form-control">
+                <span class="help-block"><?php echo $old_password_err; ?></span>
+            </div>
+
+
+
+
+
+
             <div class="form-group <?php echo (!empty($new_password_err)) ? 'has-error' : ''; ?>">
                 <label>New Password</label>
                 <input type="password" name="new_password" class="form-control" value="<?php echo $new_password; ?>">
