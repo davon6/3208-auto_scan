@@ -25,11 +25,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     } else{
         $old_password = trim($_POST["old_password"]);
 
-
-   
-        
-
-     
          // Prepare a select statement
          $sql = "SELECT  password FROM users WHERE username = ?";
         
@@ -50,24 +45,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                      // Bind result variables
                      mysqli_stmt_bind_result($stmt, $hashed_password);
                      if(mysqli_stmt_fetch($stmt)){
-                         if(password_verify($old_password, $hashed_password)){
-
-                            
+                         if(password_verify($old_password, $hashed_password)){  
                          }
                          else
                          $old_password_err = "Your old password is incorrect if forgotten select forgot password in login page";
                      }}}}
 
-
-
     }
-
-
-
-
-
-    
- 
+     
     // Validate new password
     if(empty(trim($_POST["new_password"]))){
         $new_password_err = "Please enter the new password.";     

@@ -102,7 +102,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             mysqli_stmt_bind_param($stmt, "sss", $param_username, $param_email, $param_password);
             
             // Set parameters
-            $param_username = $username;
+            $param_username =  ucfirst($username);
             $param_email = $email;
             $param_password = password_hash($password, PASSWORD_DEFAULT); // Creates a password hash
             
